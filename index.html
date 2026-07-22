@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CardioConnect 2.0+ | Future State Vision</title>
+  <meta name="description" content="A future-state vision for evolving CardioConnect from scheduling visibility to intelligent field operations." />
+  <style>
+    :root {
+      --bsc-navy: #003c71;
+      --bsc-blue: #005eb8;
+      --cyan: #00a6e0;
+      --cyan-soft: rgba(0, 166, 224, .16);
+      --cyan-line: rgba(0, 166, 224, .42);
+      --ink: #071521;
+      --midnight: #06101c;
+      --panel: rgba(7, 19, 32, .72);
+      --panel-strong: rgba(8, 25, 42, .92);
+      --glass: rgba(255, 255, 255, .08);
+      --glass-strong: rgba(255, 255, 255, .13);
+      --white: #ffffff;
+      --text: rgba(255, 255, 255, .92);
+      --muted: rgba(255, 255, 255, .68);
+      --faint: rgba(255, 255, 255, .48);
+      --line: rgba(255, 255, 255, .14);
+      --shadow: 0 28px 90px rgba(0, 0, 0, .42);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --max: 1240px;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(0, 166, 224, .20), transparent 34%),
+                  radial-gradient(circle at 90% 12%, rgba(36, 119, 192, .22), transparent 38%),
+                  linear-gradient(180deg, #06101c 0%, #07121f 44%, #04101c 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), transparent 72%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .topbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(calc(100% - 32px), var(--max));
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 12px 10px 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(5, 14, 24, .58);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 48px rgba(0,0,0,.25);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 750;
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--bsc-blue), var(--cyan));
+      box-shadow: 0 0 24px rgba(0,166,224,.46);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 8px 3px;
+      border: 1px solid rgba(255,255,255,.85);
+      border-left: 0;
+      border-right: 0;
+      transform: skewX(-18deg);
+      opacity: .8;
+    }
+
+    .nav {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      transition: all .22s var(--ease);
+    }
+
+    .nav a:hover { background: rgba(255,255,255,.08); color: var(--white); }
+
+    .section {
+      position: relative;
+      padding: 104px 24px;
+      overflow: hidden;
+    }
+
+    .section-inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding-top: 130px;
+      padding-bottom: 84px;
+      isolation: isolate;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .44;
+      filter: saturate(1.05) contrast(1.08) brightness(.75);
+      z-index: -3;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4, 16, 28, .95) 0%, rgba(4, 16, 28, .72) 44%, rgba(4, 16, 28, .35) 100%),
+                  linear-gradient(180deg, rgba(4, 16, 28, .08) 0%, rgba(4, 16, 28, .78) 100%);
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -2px; height: 220px;
+      background: linear-gradient(to bottom, transparent, #06101c 86%);
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(340px, .72fr);
+      gap: 56px;
+      align-items: end;
+    }
+
+    .kicker, .eyebrow {
+      margin: 0 0 14px;
+      color: #97dcff;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(54px, 8.2vw, 118px);
+      line-height: .9;
+      letter-spacing: -.07em;
+      margin-bottom: 22px;
+      max-width: 900px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #fff, #aee8ff 50%, #6ed9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-lede {
+      color: rgba(255,255,255,.78);
+      font-size: clamp(19px, 2.3vw, 28px);
+      line-height: 1.28;
+      max-width: 780px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: var(--white);
+      font-weight: 730;
+      cursor: pointer;
+      transition: all .22s var(--ease);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--bsc-blue), var(--cyan));
+      border-color: rgba(255,255,255,.16);
+      box-shadow: 0 16px 42px rgba(0, 166, 224, .24);
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.13); }
+    .btn.primary:hover { background: linear-gradient(135deg, #006ac9, #14b8f4); }
+
+    .hero-proof {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(2, 13, 24, .62);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+    }
+
+    .proof-label { color: var(--faint); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 16px; }
+    .proof-list { display: grid; gap: 12px; }
+    .proof-item { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 12px; border-radius: 16px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); }
+    .proof-dot { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; color: white; background: rgba(0,166,224,.16); border: 1px solid rgba(0,166,224,.32); }
+    .proof-item strong { display: block; margin-bottom: 2px; }
+    .proof-item span { color: var(--muted); font-size: 13px; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 38px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(34px, 4.5vw, 64px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      margin-bottom: 16px;
+      max-width: 790px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 760px;
+      margin-bottom: 0;
+    }
+
+    .section-note {
+      flex: 0 0 300px;
+      color: var(--muted);
+      border-left: 1px solid var(--cyan-line);
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    .workflow-section { padding-top: 76px; }
+
+    .workflow-track {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      position: relative;
+    }
+
+    .workflow-track::before {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 6%;
+      right: 6%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,166,224,.48), transparent);
+      z-index: 0;
+    }
+
+    .workflow-card {
+      position: relative;
+      z-index: 1;
+      min-height: 620px;
+      padding: 16px 16px 20px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,.105), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 28px 74px rgba(0,0,0,.28);
+      overflow: hidden;
+      transition: transform .3s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+    }
+
+    .workflow-card:hover, .workflow-card.is-playing {
+      transform: translateY(-8px);
+      border-color: rgba(0,166,224,.42);
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+    }
+
+    .chapter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-index {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: rgba(0,166,224,.13);
+      border: 1px solid rgba(0,166,224,.32);
+      color: #bdeeff;
+      font-weight: 800;
+    }
+
+    .persona-chip, .stage-badge, .system-chip, .mini-chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: rgba(255,255,255,.74);
+      background: rgba(255,255,255,.06);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+
+    .phone-shell {
+      position: relative;
+      width: min(100%, 240px);
+      margin: 0 auto 18px;
+      aspect-ratio: 9 / 18.4;
+      border-radius: 32px;
+      padding: 9px;
+      background: linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.20);
+      box-shadow: 0 24px 56px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    .phone-shell::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 72px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.45);
+      z-index: 3;
+    }
+
+    .phone-media {
+      width: 100%;
+      height: 100%;
+      border-radius: 25px;
+      overflow: hidden;
+      background: #081827;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .phone-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .workflow-copy h3 {
+      font-size: 22px;
+      letter-spacing: -.035em;
+      line-height: 1.08;
+      margin: 6px 0 10px;
+    }
+
+    .workflow-copy .stage-name {
+      color: #9ee5ff;
+      font-weight: 820;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .workflow-copy p { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+    .proof-line { color: rgba(255,255,255,.76); font-size: 13px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.09); }
+    .proof-line strong { color: var(--white); }
+
+    .bridge-section { padding-top: 78px; padding-bottom: 76px; }
+
+    .bridge-card {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      align-items: center;
+      padding: clamp(28px, 5vw, 58px);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(0,60,113,.55), rgba(0,166,224,.09)), rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bridge-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -18% -42% 42%;
+      height: 330px;
+      background: radial-gradient(circle, rgba(0,166,224,.25), transparent 66%);
+      pointer-events: none;
+    }
+
+    .bridge-card h2 { font-size: clamp(34px, 4vw, 58px); line-height: .96; letter-spacing: -.055em; margin-bottom: 18px; }
+    .bridge-card p { color: rgba(255,255,255,.76); font-size: 18px; margin-bottom: 0; }
+
+    .foundation-list { display: grid; gap: 14px; position: relative; z-index: 1; }
+    .foundation-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .foundation-item span:first-child {
+      width: 42px; height: 42px; border-radius: 15px; display: grid; place-items: center;
+      background: var(--cyan-soft); color: #bdeeff; border: 1px solid rgba(0,166,224,.28); font-weight: 820;
+    }
+    .foundation-item strong { display: block; margin-bottom: 2px; }
+    .foundation-item p { font-size: 14px; color: var(--muted); margin: 0; }
+
+    .maturity-section { padding-top: 94px; }
+
+    .maturity-shell {
+      padding: clamp(20px, 3vw, 32px);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+    }
+
+    .stage-path {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+      margin-bottom: 26px;
+    }
+
+    .stage-path::before {
+      content: "";
+      position: absolute;
+      top: 34px;
+      left: 9%; right: 9%; height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,.15), rgba(0,166,224,.55), rgba(255,255,255,.15));
+      z-index: 0;
+    }
+
+    .stage-card {
+      position: relative;
+      z-index: 1;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text);
+      padding: 16px;
+      min-height: 218px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(3, 15, 27, .72);
+      transition: all .25s var(--ease);
+    }
+
+    .stage-card:hover { transform: translateY(-3px); border-color: rgba(0,166,224,.28); }
+    .stage-card.active {
+      background: linear-gradient(180deg, rgba(0,166,224,.14), rgba(255,255,255,.06));
+      border-color: rgba(0,166,224,.45);
+      box-shadow: 0 20px 60px rgba(0,166,224,.13);
+    }
+    .stage-card.mvp { border-color: rgba(105, 220, 255, .26); }
+
+    .stage-marker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .stage-dot {
+      width: 38px; height: 38px; border-radius: 16px; display: grid; place-items: center;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.13); color: rgba(255,255,255,.78); font-weight: 830;
+    }
+    .stage-card.active .stage-dot { background: rgba(0,166,224,.20); color: white; border-color: rgba(0,166,224,.42); }
+    .stage-card h3 { font-size: 24px; letter-spacing: -.04em; margin: 0 0 5px; }
+    .stage-sub { color: #91daf7; font-size: 12px; text-transform: uppercase; letter-spacing: .10em; font-weight: 780; margin-bottom: 12px; }
+    .stage-card p { color: var(--muted); font-size: 13.5px; margin-bottom: 14px; }
+    .chip-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stage-badge.current { background: rgba(0,166,224,.17); border-color: rgba(0,166,224,.38); color: #c8f2ff; }
+
+    .maturity-detail {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .lifecycle-tabs {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      padding: 10px;
+      border-radius: 22px;
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .lifecycle-tab {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 12px 13px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(255,255,255,.72);
+      cursor: pointer;
+      transition: all .2s var(--ease);
+    }
+    .lifecycle-tab:hover { background: rgba(255,255,255,.06); color: white; }
+    .lifecycle-tab.active { background: rgba(0,166,224,.14); border-color: rgba(0,166,224,.32); color: white; }
+    .lifecycle-tab small { color: var(--faint); }
+
+    .detail-panel {
+      min-height: 350px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.11);
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+    .detail-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -48% 56%;
+      height: 250px;
+      background: radial-gradient(circle, rgba(0,166,224,.18), transparent 64%);
+      pointer-events: none;
+    }
+    .detail-top { display: flex; justify-content: space-between; gap: 18px; align-items: start; margin-bottom: 20px; position: relative; z-index: 1; }
+    .detail-top h3 { font-size: clamp(26px, 3vw, 40px); line-height: 1; letter-spacing: -.045em; margin-bottom: 10px; }
+    .detail-top p { color: var(--muted); margin-bottom: 0; max-width: 720px; }
+    .detail-kicker { color: #9ee5ff; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 780; margin-bottom: 10px; }
+
+    .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; position: relative; z-index: 1; }
+    .detail-proof {
+      padding: 15px;
+      border-radius: 18px;
+      background: rgba(5, 18, 31, .62);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+    .detail-proof strong { display: block; margin-bottom: 5px; }
+    .detail-proof span { color: var(--muted); font-size: 13px; }
+
+    .human-section { padding-top: 86px; }
+    .human-band {
+      min-height: 470px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: var(--shadow);
+      display: grid;
+      align-items: end;
+    }
+    .human-band video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .58; filter: brightness(.74) saturate(1.04); }
+    .human-band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,16,28,.94), rgba(4,16,28,.42)), linear-gradient(180deg, transparent, rgba(4,16,28,.78)); }
+    .human-copy { position: relative; z-index: 1; padding: clamp(28px, 5vw, 60px); max-width: 780px; }
+    .human-copy h2 { font-size: clamp(34px, 4.4vw, 62px); line-height: .96; letter-spacing: -.055em; margin-bottom: 16px; }
+    .human-copy p { color: rgba(255,255,255,.78); font-size: 18px; margin-bottom: 0; }
+
+    .value-grid, .systems-grid, .next-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .value-card, .system-card, .next-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.058);
+      border: 1px solid rgba(255,255,255,.11);
+      min-height: 238px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.18);
+    }
+    .value-card h3, .system-card h3, .next-card h3 { font-size: 24px; letter-spacing: -.035em; line-height: 1.08; margin-bottom: 12px; }
+    .value-card p, .system-card p, .next-card p { color: var(--muted); margin-bottom: 18px; font-size: 14px; }
+    .mini-list { display: grid; gap: 8px; color: rgba(255,255,255,.78); font-size: 13px; padding: 0; margin: 0; list-style: none; }
+    .mini-list li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: start; }
+    .mini-list li::before { content: ""; width: 7px; height: 7px; margin-top: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px rgba(0,166,224,.6); }
+
+    .systems-grid { grid-template-columns: .95fr 1.1fr .95fr; }
+    .system-chip-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .system-chip { color: rgba(255,255,255,.80); }
+
+    .closing {
+      padding-bottom: 70px;
+    }
+    .closing-card {
+      text-align: center;
+      padding: clamp(34px, 7vw, 82px);
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at 50% 0%, rgba(0,166,224,.22), transparent 38%), rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: var(--shadow);
+    }
+    .closing-card h2 { font-size: clamp(40px, 6vw, 86px); letter-spacing: -.065em; line-height: .92; margin-bottom: 22px; }
+    .closing-card p { max-width: 820px; margin: 0 auto 28px; color: var(--muted); font-size: 19px; }
+    .closing-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    @media (max-width: 1120px) {
+      .workflow-track, .stage-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .workflow-track::before, .stage-path::before { display: none; }
+      .workflow-card { min-height: 560px; }
+      .maturity-detail { grid-template-columns: 1fr; }
+      .lifecycle-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .nav { display: none; }
+      .hero-grid, .bridge-card, .value-grid, .systems-grid, .next-grid { grid-template-columns: 1fr; }
+      .hero-proof { max-width: 520px; }
+      .section-head { display: block; }
+      .section-note { margin-top: 20px; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .phone-shell { max-width: 220px; }
+    }
+
+    @media (max-width: 620px) {
+      .section { padding-left: 16px; padding-right: 16px; }
+      .workflow-track, .stage-path, .lifecycle-tabs { grid-template-columns: 1fr; }
+      .workflow-card { min-height: auto; }
+      .topbar { top: 10px; }
+      h1 { font-size: clamp(48px, 16vw, 72px); }
+      .hero { padding-top: 118px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Site navigation">
+    <a class="brand" href="#top" aria-label="CardioConnect 2.0+ home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>CardioConnect 2.0+</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#motion">Future state</a>
+      <a href="#foundation">MVP foundation</a>
+      <a href="#maturity">Maturity path</a>
+      <a href="#systems">Systems reality</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="section hero" aria-labelledby="hero-title">
+      <video class="hero-video" src="assets/cinematic/city1.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+      <div class="section-inner hero-grid">
+        <div>
+          <p class="kicker reveal">Boston Scientific · Cardiology field operations vision</p>
+          <h1 id="hero-title" class="reveal"><span class="gradient-text">From scheduling visibility to intelligent field operations.</span></h1>
+          <p class="hero-lede reveal">The MVP created a shared foundation for field scheduling. The next horizon connects the case lifecycle — helping teams anticipate risk, orchestrate coverage, prepare for procedures, and complete the work with less friction.</p>
+          <div class="hero-actions reveal">
+            <a class="btn primary" href="#motion">Explore the future state <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn" href="#maturity">See the maturity path</a>
+          </div>
+        </div>
+
+        <aside class="hero-proof reveal" aria-label="Vision proof points">
+          <div class="proof-label">Built from MVP learnings</div>
+          <div class="proof-list">
+            <div class="proof-item"><span class="proof-dot">1</span><div><strong>Grounded in the field workflow</strong><span>Coverage, readiness, documentation, inventory, and account signals connect around real case moments.</span></div></div>
+            <div class="proof-item"><span class="proof-dot">2</span><div><strong>Respectful of current investment</strong><span>The MVP is treated as the visibility layer and operating-model foundation — not a throwaway.</span></div></div>
+            <div class="proof-item"><span class="proof-dot">3</span><div><strong>Flexible across future roles</strong><span>Workflow ownership can adapt across managers, schedulers, pod leads, and regional support models.</span></div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section workflow-section" id="motion" aria-labelledby="motion-title">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <p class="eyebrow">Future state in motion</p>
+            <h2 id="motion-title">A connected case lifecycle, told through four workflow moments.</h2>
+            <p>These moments use personas as workflow lenses. The operating model can flex across clinical managers, schedulers, pod leads, and regional support structures as BSC’s field organization evolves.</p>
+          </div>
+          <p class="section-note">Hover or tap each card to play the prototype loop. The sequence is intentionally linear: anticipate, orchestrate, prepare, complete.</p>
+        </div>
+
+        <div class="workflow-track reveal" aria-label="Four future-state workflow cards">
+          <article class="workflow-card" tabindex="0">
+            <div class="chapter"><span class="chapter-index">01</span><span class="persona-chip">Monica · Field leader</span></div>
+            <div class="phone-shell"><div class="phone-media"><video src="assets/workflow-loops/anticipate.mp4" poster="assets/workflow-loops/anticipate-poster.jpg" muted loop playsinline preload="metadata"></video></div></div>
+            <div class="workflow-copy">
+              <div class="stage-name">Anticipate</div>
+              <h3>Surface risk before it becomes disruption.</h3>
+              <p>A field leader starts the day with an intelligent briefing that prioritizes urgent coverage, case readiness, and inventory needs across CRM, EP, and Watchman activity.</p>
+              <div class="proof-line"><strong>What it proves:</strong> CardioConnect can evolve from a schedule viewer into an action surface.</div>
+            </div>
+          </article>
+
+          <article class="workflow-card" tabindex="0">
+            <div class="chapter"><span class="chapter-index">02</span><span class="persona-chip">Monica · Coverage owner</span></div>
+            <div class="phone-shell"><div class="phone-media"><video src="assets/workflow-loops/orchestrate.mp4" poster="assets/workflow-loops/orchestrate-poster.jpg" muted loop playsinline preload="metadata"></video></div></div>
+            <div class="workflow-copy">
+              <div class="stage-name">Orchestrate</div>
+              <h3>Turn a coverage gap into a confident assignment.</h3>
+              <p>Assist recommends qualified coverage using case context, availability, proximity, workload, and physician familiarity — while the coverage owner keeps final control.</p>
+              <div class="proof-line"><strong>What it proves:</strong> AI supports judgment without removing human accountability.</div>
+            </div>
+          </article>
+
+          <article class="workflow-card" tabindex="0">
+            <div class="chapter"><span class="chapter-index">03</span><span class="persona-chip">Javier · Clinical rep</span></div>
+            <div class="phone-shell"><div class="phone-media"><video src="assets/workflow-loops/prepare.mp4" poster="assets/workflow-loops/prepare-poster.jpg" muted loop playsinline preload="metadata"></video></div></div>
+            <div class="workflow-copy">
+              <div class="stage-name">Prepare</div>
+              <h3>Give the rep a field-ready handoff.</h3>
+              <p>Javier receives the new case with procedure details, physician context, inventory readiness, and the documentation path already connected.</p>
+              <div class="proof-line"><strong>What it proves:</strong> An assignment can become an executable handoff, not another coordination thread.</div>
+            </div>
+          </article>
+
+          <article class="workflow-card" tabindex="0">
+            <div class="chapter"><span class="chapter-index">04</span><span class="persona-chip">Javier · Clinical rep</span></div>
+            <div class="phone-shell"><div class="phone-media"><video src="assets/workflow-loops/complete.mp4" poster="assets/workflow-loops/complete-poster.jpg" muted loop playsinline preload="metadata"></video></div></div>
+            <div class="workflow-copy">
+              <div class="stage-name">Complete</div>
+              <h3>Carry the case through documentation.</h3>
+              <p>Known case information flows into the procedure record, while scan and capture support helps complete documentation inside CardioConnect.</p>
+              <div class="proof-line"><strong>What it proves:</strong> Scheduling becomes the front door to the full case record.</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bridge-section" id="foundation" aria-labelledby="foundation-title">
+      <div class="section-inner">
+        <div class="bridge-card reveal">
+          <div>
+            <p class="eyebrow">MVP foundation</p>
+            <h2 id="foundation-title">The MVP is the foundation, not the throwaway.</h2>
+            <p>CardioConnect MVP created the first shared layer for field scheduling visibility — bringing work intake, assignment, mobile access, and team coordination into a more consistent operating model.</p>
+          </div>
+          <div class="foundation-list" aria-label="MVP foundation proof points">
+            <div class="foundation-item"><span>01</span><div><strong>Shared work visibility</strong><p>Procedures, non-procedure activity, and unavailable time can be represented as field work that teams can see and coordinate around.</p></div></div>
+            <div class="foundation-item"><span>02</span><div><strong>Assignment operating model</strong><p>Coverage decisions, reassignment, team calendar views, and field mobile access establish the behaviors needed for future intelligence.</p></div></div>
+            <div class="foundation-item"><span>03</span><div><strong>Platform learning</strong><p>The MVP clarifies where packaged capabilities fit — and where the next horizon may require deeper integration, automation, or custom experiences.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section maturity-section" id="maturity" aria-labelledby="maturity-title">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <p class="eyebrow">Maturity path</p>
+            <h2 id="maturity-title">A maturity path grounded in the field lifecycle.</h2>
+            <p>The top line shows the evolution. The interactive proof layer underneath shows how that evolution changes actual field work.</p>
+          </div>
+          <p class="section-note">Presenter mode: click a stage first, then click lifecycle areas to highlight concrete capability examples.</p>
+        </div>
+
+        <div class="maturity-shell reveal">
+          <div class="stage-path" role="tablist" aria-label="Maturity stages">
+            <button class="stage-card" data-stage="fragmented" type="button" role="tab">
+              <div class="stage-marker"><span class="stage-dot">1</span></div>
+              <h3>Fragmented</h3>
+              <div class="stage-sub">Before MVP</div>
+              <p>Field work depends on manual coordination, siloed systems, local workarounds, and knowledge living in people’s heads.</p>
+              <div class="chip-stack"><span class="stage-badge">Calls & texts</span><span class="stage-badge">Spreadsheets</span><span class="stage-badge">Manual handoffs</span></div>
+            </button>
+            <button class="stage-card mvp active" data-stage="visible" type="button" role="tab" aria-selected="true">
+              <div class="stage-marker"><span class="stage-dot">2</span><span class="stage-badge current">Current MVP</span></div>
+              <h3>Visible</h3>
+              <div class="stage-sub">CardioConnect MVP</div>
+              <p>A shared scheduling and assignment layer gives teams better visibility into work, coverage, and mobile field activity.</p>
+              <div class="chip-stack"><span class="stage-badge">Common intake</span><span class="stage-badge">Team schedule</span><span class="stage-badge">Mobile access</span></div>
+            </button>
+            <button class="stage-card" data-stage="connected" type="button" role="tab">
+              <div class="stage-marker"><span class="stage-dot">3</span></div>
+              <h3>Connected</h3>
+              <div class="stage-sub">CardioConnect 2.0 / 3.0</div>
+              <p>Scheduling connects to case preparation, documentation, inventory readiness, and account context.</p>
+              <div class="chip-stack"><span class="stage-badge">Case readiness</span><span class="stage-badge">Procedure record</span><span class="stage-badge">Inventory triggers</span></div>
+            </button>
+            <button class="stage-card" data-stage="intelligent" type="button" role="tab">
+              <div class="stage-marker"><span class="stage-dot">4</span></div>
+              <h3>Intelligent</h3>
+              <div class="stage-sub">Future horizon</div>
+              <p>Data and Assist recommend action, surface risk, balance workload, and help teams predict, prepare, and pivot.</p>
+              <div class="chip-stack"><span class="stage-badge">Recommendations</span><span class="stage-badge">Risk signals</span><span class="stage-badge">Next-best action</span></div>
+            </button>
+          </div>
+
+          <div class="maturity-detail">
+            <div class="lifecycle-tabs" role="tablist" aria-label="Lifecycle proof points">
+              <button class="lifecycle-tab active" data-area="intake" type="button"><span>Intake / Request</span><small>Start the work</small></button>
+              <button class="lifecycle-tab" data-area="schedule" type="button"><span>Schedule & Assign</span><small>Coordinate coverage</small></button>
+              <button class="lifecycle-tab" data-area="prepare" type="button"><span>Prepare</span><small>Ready the case</small></button>
+              <button class="lifecycle-tab" data-area="document" type="button"><span>Document & Close</span><small>Complete the record</small></button>
+              <button class="lifecycle-tab" data-area="inventory" type="button"><span>Inventory / Follow-up</span><small>Protect readiness</small></button>
+              <button class="lifecycle-tab" data-area="insight" type="button"><span>Account / Leadership Insight</span><small>Act on signals</small></button>
+            </div>
+            <article class="detail-panel" aria-live="polite">
+              <div class="detail-top">
+                <div>
+                  <div class="detail-kicker" id="detail-kicker">Visible · Intake / Request</div>
+                  <h3 id="detail-title">Work becomes a shared request.</h3>
+                  <p id="detail-desc">The MVP starts to normalize how teams capture work, moving core scheduling needs toward a common intake and assignment foundation.</p>
+                </div>
+                <span class="mini-chip" id="detail-chip">Current foundation</span>
+              </div>
+              <div class="detail-grid" id="detail-grid"></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section human-section" aria-labelledby="human-title">
+      <div class="section-inner">
+        <div class="human-band reveal">
+          <video src="assets/cinematic/walk-cathlab-handshake.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+          <div class="human-copy">
+            <p class="eyebrow">Human field moment</p>
+            <h2 id="human-title">Technology matters most when it disappears into the work.</h2>
+            <p>The future of CardioConnect is not another destination for field teams to manage. It is a connected operating layer that supports the moments before, during, and after each case.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="value-title">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <p class="eyebrow">What connected work makes possible</p>
+            <h2 id="value-title">Downstream value appears when the case lifecycle is connected.</h2>
+            <p>Once scheduling, readiness, and documentation share context, field activity can begin informing inventory, account, and leadership decisions.</p>
+          </div>
+        </div>
+        <div class="value-grid reveal">
+          <article class="value-card">
+            <span class="mini-chip">Continue</span>
+            <h3>Inventory readiness</h3>
+            <p>Confirmed device use can reduce expiration risk, update account stock position, and trigger replenishment before the next case is at risk.</p>
+            <ul class="mini-list"><li>Expiration opportunity surfaced before use</li><li>Below-par condition created after documentation</li><li>Replenishment request prepared from case context</li></ul>
+          </article>
+          <article class="value-card">
+            <span class="mini-chip">Act</span>
+            <h3>Account signals</h3>
+            <p>Procedure activity, urgent add-ons, coverage needs, and inventory follow-through can become territory signals instead of disconnected reports.</p>
+            <ul class="mini-list"><li>Methodist surfaces from urgent CRM activity</li><li>Physician outreach can be prioritized</li><li>Field events become account context</li></ul>
+          </article>
+          <article class="value-card">
+            <span class="mini-chip">Lead</span>
+            <h3>Leadership visibility</h3>
+            <p>Managers and leaders can see demand, workload, readiness risk, and follow-through across teams without relying solely on retrospective reporting.</p>
+            <ul class="mini-list"><li>Coverage gaps and capacity concerns visible earlier</li><li>Team workload balancing becomes actionable</li><li>Operational health can be monitored by region</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="systems" aria-labelledby="systems-title">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div class="section-title">
+            <p class="eyebrow">Implementation reality</p>
+            <h2 id="systems-title">Future exploration should honor the stack BSC already has.</h2>
+            <p>This vision is not a blanket replacement story. It is a way to evaluate which layers should remain packaged, which should integrate more deeply, and where custom or AI-enabled experiences could create differentiated value.</p>
+          </div>
+        </div>
+        <div class="systems-grid reveal">
+          <article class="system-card">
+            <h3>Current foundation</h3>
+            <p>Systems and MVP capabilities that created the shared visibility layer.</p>
+            <div class="system-chip-wrap"><span class="system-chip">ServiceMax Go</span><span class="system-chip">Salesforce</span><span class="system-chip">Assignment workflows</span><span class="system-chip">Mobile schedule</span><span class="system-chip">Team calendar</span></div>
+          </article>
+          <article class="system-card">
+            <h3>Systems to assess</h3>
+            <p>Places where the case lifecycle intersects with existing BSC tools, data, and operating constraints.</p>
+            <div class="system-chip-wrap"><span class="system-chip">AFS Procedure Worksheet</span><span class="system-chip">CRM IRIS REX</span><span class="system-chip">Inventory / ERP</span><span class="system-chip">Reporting layer</span><span class="system-chip">Account data</span><span class="system-chip">Physician context</span></div>
+          </article>
+          <article class="system-card">
+            <h3>Future enablers</h3>
+            <p>Capabilities that can build from the MVP once work, context, and case outcomes are more connected.</p>
+            <div class="system-chip-wrap"><span class="system-chip">Assist layer</span><span class="system-chip">Recommendation logic</span><span class="system-chip">Readiness signals</span><span class="system-chip">Barcode capture</span><span class="system-chip">Document extraction</span><span class="system-chip">Field insights</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section closing" aria-labelledby="closing-title">
+      <div class="section-inner">
+        <div class="closing-card reveal">
+          <p class="eyebrow">Next horizon</p>
+          <h2 id="closing-title">The next phase is not about replacing the MVP. It is about evolving what it made possible.</h2>
+          <p>CardioConnect can become the connective layer between field scheduling, case readiness, procedure completion, inventory follow-through, and customer insight — with platform decisions guided by the workflows that matter most.</p>
+          <div class="closing-actions">
+            <span class="mini-chip">Protect MVP value</span>
+            <span class="mini-chip">Prioritize connected workflows</span>
+            <span class="mini-chip">Assess platform architecture</span>
+            <span class="mini-chip">Prototype the next horizon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const maturityContent = {
+      fragmented: {
+        label: "Fragmented",
+        chip: "Before MVP",
+        areas: {
+          intake: { title: "Requests start in too many places.", desc: "Procedure needs, non-procedure work, and availability changes can enter through different channels, creating downstream reconciliation work.", points: [["Informal channels", "Calls, texts, email, Outlook, and local trackers carry key scheduling details."], ["Variable fields", "Required details depend on division, account, physician, procedure type, and local habits."], ["Late clarity", "Missing information may not surface until a scheduler, manager, or rep is already trying to coordinate coverage."], ["No single source", "The work object is often assembled through people, not a consistent product experience."]] },
+          schedule: { title: "Coverage is coordinated through manual effort.", desc: "Teams rely on local knowledge to match qualification, proximity, availability, physician familiarity, workload, and urgency.", points: [["Manual matching", "Coverage decisions depend on who knows which reps are qualified, nearby, and available."], ["Calendar fragmentation", "Personal events, procedures, non-procedure activity, and team capacity may not share one view."], ["Escalation by interruption", "Urgent needs can trigger calls and texts instead of guided workflows."], ["Manager burden", "Experienced leaders absorb the complexity rather than the system supporting the decision."]] },
+          prepare: { title: "Case prep depends on the rep finding context.", desc: "Procedure details, account context, physician preferences, inventory readiness, and prior notes may live across tools or in tribal knowledge.", points: [["Context hunting", "Reps assemble what they need from multiple systems or team memory."], ["Physician nuance", "Preferences and account patterns may be known locally but not visible in the work object."], ["Inventory uncertainty", "Required devices and expiration opportunities may be checked outside the scheduling flow."], ["Variable handoff quality", "The quality of preparation depends heavily on who created and assigned the work."]] },
+          document: { title: "Documentation sits outside the scheduling moment.", desc: "The procedure record may require re-entry, separate worksheets, scanning, and downstream submission outside the flow that initiated the case.", points: [["Duplicate entry", "Known scheduling details may need to be re-keyed into procedure documentation."], ["Separate worksheets", "AFS Procedure Worksheet and CRM IRIS REX patterns remain distinct."], ["Manual capture", "Device data, measured values, programmed parameters, and proof of delivery require careful after-the-fact work."], ["Delayed close", "The case may be operationally complete before the data trail is fully closed."]] },
+          inventory: { title: "Inventory follow-up happens after the fact.", desc: "Device use, expiration avoidance, par levels, replenishment, and account readiness may not automatically connect back to the procedure event.", points: [["Separated signals", "Inventory opportunities may be visible only to people checking separate tools or reports."], ["Delayed replenishment", "Below-par conditions may appear after case work is already complete."], ["Expiration risk", "Using soon-to-expire product depends on awareness and timing."], ["Account readiness gap", "Future case readiness is harder to protect without a connected feedback loop."]] },
+          insight: { title: "Leaders interpret activity after it happens.", desc: "Demand, urgent add-ons, workload pressure, and account opportunity can show up as reporting rather than timely action.", points: [["Retrospective visibility", "Leaders may see patterns after teams have already absorbed the disruption."], ["Account signals hidden", "Urgent cases, physician activity, and inventory follow-through are not always connected."], ["Workload imbalance", "Capacity strain can be visible informally before it is visible systematically."], ["Harder prioritization", "Territory outreach depends on interpreting disconnected operational inputs."]] }
+        }
+      },
+      visible: {
+        label: "Visible",
+        chip: "Current foundation",
+        areas: {
+          intake: { title: "Work becomes a shared request.", desc: "The MVP starts to normalize how teams capture work, moving core scheduling needs toward a common intake and assignment foundation.", points: [["Common work patterns", "Procedures, non-procedure activities, and unavailable time become visible field work items."], ["Shared metadata", "The work object begins carrying date, time, account, physician, procedure, and assignment context."], ["Division-aware inputs", "CRM, EP, and Watchman needs can be represented without forcing every workflow to be identical."], ["Foundation for automation", "More consistent intake creates the data trail future intelligence requires."]] },
+          schedule: { title: "Teams can see planned work and coverage status.", desc: "The MVP creates visibility into assignments, reassignment, schedules, and team activity from desktop and mobile experiences.", points: [["Assignment visibility", "Unassigned, assigned, action required, in progress, closed, and cancelled states can orient teams."], ["Mobile field access", "Field users can see their day and team context without depending entirely on desktop coordination."], ["Team calendar", "Managers and schedulers gain better visibility into multiple users and field commitments."], ["Coverage foundation", "Visibility is the prerequisite for smarter recommendation and workload balancing."]] },
+          prepare: { title: "Preparation can start from the schedule.", desc: "The MVP creates the handoff object that future readiness capabilities can build from: procedure, account, physician, assignment, and timing context.", points: [["Case context starts earlier", "Scheduling details can carry into the future case briefing."], ["Rep handoff improves", "Assigned reps have a clearer starting point for what they are covering."], ["Readiness potential", "The schedule becomes the place where required information can be checked before the procedure."], ["MVP learning", "Usability and field validation clarify what context matters most to reps."]] },
+          document: { title: "Documentation can be launched from the case context.", desc: "The MVP does not need to solve all documentation to create value; it creates the connective starting point for future procedure records.", points: [["Known details available", "Procedure, account, physician, date, time, and assigned clinical can prefill later documentation."], ["Integration path clearer", "AFS Procedure Worksheet and CRM IRIS REX gaps become explicit integration questions."], ["Less duplicate effort over time", "The value opportunity is clearer once scheduling and documentation share a work object."], ["Governance foundation", "Visibility into case status helps define what completion should mean downstream."]] },
+          inventory: { title: "Inventory can be associated to scheduled work.", desc: "MVP visibility creates the timing and case context needed to assess future inventory readiness earlier in the workflow.", points: [["Procedure-linked inventory", "The system can begin asking what required devices or stock are needed for the scheduled case."], ["Readiness actions", "Inventory review can become an action connected to a case rather than a separate reminder."], ["Account context", "Hospital and procedure context gives the future system a reason to check par and availability."], ["Data foundation", "More consistent case capture supports future utilization and replenishment signals."]] },
+          insight: { title: "Leaders see more of the operating picture.", desc: "Shared work visibility creates the first layer of leadership insight into demand, assignment, and field activity.", points: [["Workload visibility", "Team and individual schedules become easier to inspect and discuss."], ["Operational language", "Teams can align around shared statuses and work types."], ["Regional view potential", "The same work objects can roll up into manager and leader views."], ["Future signal layer", "Once work is visible, the next step is connecting it to outcomes and recommendations."]] }
+        }
+      },
+      connected: {
+        label: "Connected",
+        chip: "2.0 / 3.0 horizon",
+        areas: {
+          intake: { title: "Requests create downstream case context.", desc: "Intake becomes more than a scheduling form. It creates a connected record that can power readiness, documentation, inventory, and insight.", points: [["Prefill-ready data", "Patient, account, physician, procedure, assigned rep, timing, and division-specific details flow forward."], ["Bulk and recurring patterns", "High-volume procedure days and recurring clinics can be created without repetitive entry."], ["Role-flexible ownership", "Managers, schedulers, pod leads, or regional support can operate the workflow depending on future org design."], ["Data quality at entry", "The system can flag missing context before it creates downstream friction."]] },
+          schedule: { title: "Scheduling connects to readiness and capacity.", desc: "The schedule becomes a live operations view, combining work, coverage, readiness, and capacity signals in one experience.", points: [["Coverage recommendations", "Qualified reps can be evaluated against availability, proximity, workload, and physician familiarity."], ["Team capacity", "Workload concerns become visible before the week breaks down."], ["Travel and timing", "Case timing, location, and current commitments can inform assignment decisions."], ["Explainable decisions", "The system shows why someone is recommended while preserving human control."]] },
+          prepare: { title: "The rep receives a field-ready briefing.", desc: "Assignment handoff connects procedure details, physician context, inventory readiness, and documentation expectations before arrival.", points: [["Readiness summary", "Coverage, procedure details, required inventory, physician context, and documentation status are visible together."], ["Physician context", "Known preferences and account patterns can travel with the case."], ["Inventory opportunity", "Soon-to-expire compatible products and required inventory can be surfaced ahead of time."], ["Prepared worksheet", "The documentation path is ready when the procedure is complete."]] },
+          document: { title: "The procedure record is completed inside the connected case.", desc: "Known details flow into documentation, while device scanning and document capture help complete the required record with user confirmation.", points: [["Prefilled worksheet", "Scheduling and case data prepopulate account, physician, procedure, date/time, and assigned clinical."], ["Barcode capture", "Implanted device details can be scanned and confirmed."], ["Document extraction", "Measured data, programmed parameters, and supporting values can be captured for review."], ["Submission and output", "The record can support PDF generation, proof of delivery, and downstream routing."]] },
+          inventory: { title: "Device use creates inventory follow-through.", desc: "Procedure completion can update utilization, identify below-par conditions, and prepare replenishment based on actual case activity.", points: [["Expiration avoided", "Compatible soon-to-expire inventory can be intentionally used when appropriate."], ["Stock impact", "Confirmed device use can flag below-par status at the account."], ["Replenishment trigger", "A request can be prepared from the documented case instead of handled separately."], ["Next-case readiness", "Inventory actions connect back to upcoming procedure risk."]] },
+          insight: { title: "Operational activity becomes account context.", desc: "Urgent cases, coverage response, inventory follow-through, and procedure demand can surface as account and leadership signals.", points: [["Account signal", "Methodist can surface because urgent CRM activity, coverage, and inventory all point to near-term demand."], ["Physician prioritization", "Territory managers can see which physicians may need proactive outreach."], ["Leadership view", "Managers can inspect patterns across workload, readiness, and follow-through."], ["Less report interpretation", "Connected events become guided action, not just dashboards."]] }
+        }
+      },
+      intelligent: {
+        label: "Intelligent",
+        chip: "Future horizon",
+        areas: {
+          intake: { title: "The system helps capture the right work the first time.", desc: "Assist can guide intake, detect missing details, and suggest patterns based on procedure type, account, physician, and historical behavior.", points: [["Smart prompts", "The system asks for missing details before they become coordination problems."], ["Pattern recognition", "Recurring clinics, bulk procedures, and common add-on patterns can be suggested."], ["Division-aware guidance", "CRM, EP, and Watchman flows can be supported without over-customizing every form."], ["Data confidence", "The system can show what is known, inferred, or still needs confirmation."]] },
+          schedule: { title: "The system recommends the next best coverage action.", desc: "Assist evaluates operational signals and recommends actions that a manager or scheduler can accept, adjust, or reject.", points: [["Best-fit coverage", "Qualification, proximity, availability, workload, physician familiarity, and priority can be weighed together."], ["Workload balancing", "Capacity concerns can surface with reassignment options before burnout or disruption."], ["Disruption response", "Urgent add-ons can trigger guided coverage recommendations quickly."], ["Explainability", "Every recommendation includes a reason, not just an answer."]] },
+          prepare: { title: "Readiness risks surface before the case.", desc: "The system can anticipate what may block a successful procedure and guide the rep or team toward resolution.", points: [["Readiness risk", "Missing inventory, incomplete context, or coverage concerns can be flagged early."], ["Physician briefing", "Known preferences and account history can be summarized in plain language."], ["Inventory guidance", "Expiration opportunities and required stock can be recommended before arrival."], ["Contextual Assist", "Reps can ask case-specific questions without hunting across tools."]] },
+          document: { title: "Documentation becomes assisted, not manual." , desc: "Assist can accelerate capture, flag inconsistencies, and help the rep complete the record while keeping user confirmation in the loop.", points: [["Field extraction", "Scanned documents can suggest measured data and programmed parameters for review."], ["Complaint assessment support", "The system can prompt for product performance concerns and required follow-up."], ["Completion checks", "Missing proof of delivery, removed/attempted items, or required fields can be flagged."], ["Quality guardrails", "The rep remains accountable for review and submission."]] },
+          inventory: { title: "Inventory actions become proactive.", desc: "The system can predict future readiness risk by connecting scheduled cases, account stock, utilization, expiration, and replenishment status.", points: [["Expiration intelligence", "Use opportunities can be surfaced before product expires."], ["Par-level prediction", "Upcoming cases can be evaluated against current and expected stock."], ["Auto-prepared requests", "Replenishment can be drafted from confirmed utilization and upcoming need."], ["Account readiness", "Inventory becomes part of case readiness, not a separate afterthought."]] },
+          insight: { title: "Field activity becomes guided strategy.", desc: "Leaders and territory managers can use operational signals to prioritize outreach, resource planning, and investment decisions.", points: [["Account prioritization", "Assist can recommend where field leaders or TMs should focus this week."], ["Demand signals", "Urgent add-ons and repeat coverage needs can indicate changing physician or account behavior."], ["Regional planning", "Capacity, workload, and demand can support staffing and coverage strategy."], ["Predict / prepare / pivot", "The system helps teams act before the next issue becomes visible."]] }
+        }
+      }
+    };
+
+    let activeStage = "visible";
+    let activeArea = "intake";
+
+    function renderDetail() {
+      const stage = maturityContent[activeStage];
+      const content = stage.areas[activeArea];
+      const areaLabel = document.querySelector(`.lifecycle-tab[data-area="${activeArea}"] span`).textContent;
+      document.getElementById("detail-kicker").textContent = `${stage.label} · ${areaLabel}`;
+      document.getElementById("detail-title").textContent = content.title;
+      document.getElementById("detail-desc").textContent = content.desc;
+      document.getElementById("detail-chip").textContent = stage.chip;
+      const grid = document.getElementById("detail-grid");
+      grid.innerHTML = content.points.map(([title, body]) => `<div class="detail-proof"><strong>${title}</strong><span>${body}</span></div>`).join("");
+    }
+
+    document.querySelectorAll(".stage-card").forEach(button => {
+      button.addEventListener("click", () => {
+        activeStage = button.dataset.stage;
+        document.querySelectorAll(".stage-card").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+        button.classList.add("active");
+        button.setAttribute("aria-selected", "true");
+        renderDetail();
+      });
+    });
+
+    document.querySelectorAll(".lifecycle-tab").forEach(button => {
+      button.addEventListener("click", () => {
+        activeArea = button.dataset.area;
+        document.querySelectorAll(".lifecycle-tab").forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+        renderDetail();
+      });
+    });
+
+    document.querySelectorAll(".workflow-card").forEach(card => {
+      const video = card.querySelector("video");
+      const play = () => { card.classList.add("is-playing"); video.play().catch(() => {}); };
+      const pause = () => { card.classList.remove("is-playing"); video.pause(); video.currentTime = 0; };
+      card.addEventListener("mouseenter", play);
+      card.addEventListener("mouseleave", pause);
+      card.addEventListener("focusin", play);
+      card.addEventListener("focusout", pause);
+      card.addEventListener("click", () => video.paused ? play() : pause());
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("in");
+      });
+    }, { threshold: .16 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    renderDetail();
+  </script>
+</body>
+</html>
