@@ -2685,44 +2685,46 @@ body.proposal-open {
             </linearGradient>
           </defs>
 
-          <path class="curve-base-line" d="M80 196 C 250 194, 350 186, 450 174 C 585 158, 675 136, 745 108 C 835 72, 900 66, 955 48 C 985 38, 1005 31, 1020 26" />
-          <path class="curve-maturity-line" d="M80 196 C 250 194, 350 186, 450 174 C 585 158, 675 136, 745 108 C 835 72, 900 66, 955 48 C 985 38, 1005 31, 1020 26" />
+         <path class="curve-base-line" d="M80 216 C 250 214, 380 208, 520 188 C 680 164, 760 142, 840 98 C 925 52, 980 20, 1040 8" />
+        <path class="curve-maturity-line" d="M80 216 C 250 214, 380 208, 520 188 C 680 164, 760 142, 840 98 C 925 52, 980 20, 1040 8" />  
+         
 
-          <circle class="curve-stage-dot" cx="80" cy="196" r="9" />
-          <circle class="curve-stage-dot" cx="315" cy="189" r="9" />
-          <circle class="curve-stage-dot is-current" cx="420" cy="178" r="13" />
-<line class="you-are-here-line" x1="420" y1="194" x2="420" y2="272" />
+        <!-- 4 maturity milestones -->
+<circle class="curve-stage-dot" cx="80" cy="216" r="8" />
+<circle class="curve-stage-dot" cx="330" cy="209" r="8" />
+<circle class="curve-stage-dot" cx="640" cy="171" r="8" />
+<circle class="curve-stage-dot" cx="1040" cy="8" r="8" />
 
-<g class="you-are-here-marker" transform="translate(420 280)">
+<!-- We are here marker: under the curve, not an extra stage dot -->
+<line class="you-are-here-line" x1="430" y1="146" x2="430" y2="198" />
+
+<g class="you-are-here-marker" transform="translate(430 112)">
   <rect class="you-are-here-pill" x="-62" y="0" width="124" height="28" rx="14" />
   <text class="you-are-here-pill-text" x="0" y="18" text-anchor="middle">We are here</text>
-
-  <text class="you-are-here-sub" x="0" y="48" text-anchor="middle">MVP is creating shared visibility and process,</text>
-  <text class="you-are-here-sub" x="0" y="65" text-anchor="middle">with momentum toward connected case lifecycle.</text>
 </g>
 
+<!-- Milestone labels -->
+<g class="curve-label" transform="translate(80 244)">
+  <text class="curve-stage-title" text-anchor="middle">Fragmented</text>
+  <text class="curve-stage-subtitle" y="18" text-anchor="middle">Manual coordination</text>
+</g>
 
-          <circle class="curve-stage-dot" cx="560" cy="162" r="9" />
-          <circle class="curve-stage-dot" cx="775" cy="96" r="9" />
-          <circle class="curve-stage-dot" cx="1020" cy="26" r="9" />
+<g class="curve-label" transform="translate(330 237)">
+  <text class="curve-stage-title" text-anchor="middle">Visible</text>
+  <text class="curve-stage-subtitle" y="18" text-anchor="middle">MVP foundation</text>
+</g>
 
+<g class="curve-label" transform="translate(640 199)">
+  <text class="curve-stage-title" text-anchor="middle">Connected</text>
+  <text class="curve-stage-subtitle" y="18" text-anchor="middle">Case lifecycle</text>
+</g>
 
-
-          <text x="80" y="234" text-anchor="middle" class="curve-stage-title">Fragmented</text>
-          <text x="80" y="253" text-anchor="middle" class="curve-stage-subtitle">Manual coordination</text>
-
-          <text x="315" y="227" text-anchor="middle" class="curve-stage-title current">Visible</text>
-          <text x="315" y="246" text-anchor="middle" class="curve-stage-subtitle">MVP foundation</text>
-
-          <text x="560" y="200" text-anchor="middle" class="curve-stage-title">Connected</text>
-          <text x="560" y="219" text-anchor="middle" class="curve-stage-subtitle">Case lifecycle</text>
-
-          <text x="775" y="134" text-anchor="middle" class="curve-stage-title">Intelligent</text>
-          <text x="775" y="153" text-anchor="middle" class="curve-stage-subtitle">Assistive action</text>
-
-          <text x="1020" y="66" text-anchor="middle" class="curve-stage-title">Transformed</text>
-          <text x="1020" y="85" text-anchor="middle" class="curve-stage-subtitle">Business transformation</text>
-        </svg>
+<g class="curve-label" transform="translate(1040 36)">
+  <text class="curve-stage-title" text-anchor="middle">Intelligent</text>
+  <text class="curve-stage-subtitle" y="18" text-anchor="middle">AI-assisted action</text>
+</g>
+<!--end labels-->
+</svg>
 
         <div class="curve-axis-labels" aria-hidden="true">
           <span>Lower maturity</span>
