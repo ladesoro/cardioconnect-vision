@@ -2502,9 +2502,42 @@ body.proposal-open {
     border-radius: 28px 28px 0 0;
   }
 }
+.site-brand {
+  position: fixed;
+  top: 22px;
+  right: 24px;
+  z-index: 999;
+  padding: 15px 16px;
+  border-radius: 999px;
+  background: rgba(2, 9, 18, .38);
+  border: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .16);
+  backdrop-filter: blur(12px);
+}
+
+.site-brand img {
+  display: block;
+  width: 80px;
+  height: auto;
+}
+
+@media (max-width: 760px) {
+  .site-brand {
+    top: 14px;
+    right: 14px;
+    padding: 8px 11px;
+  }
+
+  .site-brand img {
+    width: 78px;
+  }
+}
   </style>
 </head>
 <body>
+  <div class="site-brand">
+  <img src="assets/logo.svg" alt="Slalom" />
+</div>
   <main class="site-shell">
     <section class="hero" aria-label="CardioConnect future state hero">
       <video class="hero-video" src="assets/cinematic/city1.mp4" autoplay muted loop playsinline preload="auto"></video>
