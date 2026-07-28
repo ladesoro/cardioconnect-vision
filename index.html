@@ -2532,6 +2532,452 @@ body.proposal-open {
     width: 78px;
   }
 }
+/* =========================================
+   UPDATED PROPOSAL DRAWER CONTENT
+   ========================================= */
+
+.proposal-drawer-inner {
+  --proposal-ink: #061b2a;
+  --proposal-navy: #003c71;
+  --proposal-blue: #00a6e0;
+  --proposal-cyan: #7ee7ff;
+  --proposal-muted: #5c7182;
+  --proposal-line: rgba(0, 96, 142, .14);
+
+  width: min(1420px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: clamp(42px, 5vw, 72px);
+  color: var(--proposal-ink);
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(0, 166, 224, .13),
+      transparent 31rem
+    ),
+    radial-gradient(
+      circle at 96% 12%,
+      rgba(98, 230, 196, .11),
+      transparent 28rem
+    ),
+    linear-gradient(180deg, #fff 0%, #eefaff 100%);
+  border-radius: 38px 38px 0 0;
+}
+
+.proposal-drawer .drawer-kicker,
+.proposal-drawer .section-label,
+.proposal-drawer .step-label,
+.proposal-drawer .activity-label,
+.proposal-drawer .takeaway-label {
+  margin: 0;
+  color: #0874a4;
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.proposal-drawer .drawer-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, .62fr);
+  gap: clamp(30px, 5vw, 76px);
+  align-items: end;
+  padding-right: 54px;
+}
+
+.proposal-drawer .drawer-title {
+  max-width: 860px;
+  margin: 13px 0 0;
+  color: var(--proposal-ink);
+  font-size: clamp(2.8rem, 5.7vw, 6.15rem);
+  line-height: .9;
+  letter-spacing: -.067em;
+}
+
+.proposal-drawer .drawer-lead {
+  margin: 0;
+  color: rgba(6, 27, 42, .67);
+  font-size: clamp(1rem, 1.25vw, 1.18rem);
+  line-height: 1.55;
+}
+
+.proposal-drawer .engagement-premise {
+  display: grid;
+  grid-template-columns: minmax(220px, .44fr) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 52px);
+  align-items: center;
+  margin-top: clamp(32px, 4vw, 48px);
+  padding: 24px 28px;
+  border: 1px solid rgba(0, 96, 142, .13);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(0, 166, 224, .09),
+      rgba(98, 230, 196, .08)
+    ),
+    rgba(255, 255, 255, .72);
+  box-shadow: 0 16px 40px rgba(0, 60, 113, .06);
+}
+
+.proposal-drawer .engagement-premise h3 {
+  margin: 0;
+  color: var(--proposal-ink);
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.proposal-drawer .engagement-premise > p {
+  margin: 0;
+  color: var(--proposal-muted);
+  font-size: .98rem;
+  line-height: 1.55;
+}
+
+.proposal-drawer .decision-section,
+.proposal-drawer .work-section,
+.proposal-drawer .outcomes-section {
+  margin-top: clamp(38px, 5vw, 58px);
+}
+
+.proposal-drawer .section-head {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.proposal-drawer .section-head h3 {
+  margin: 0;
+  color: var(--proposal-ink);
+  font-size: clamp(1.65rem, 2.8vw, 2.55rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+
+.proposal-drawer .section-head > p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--proposal-muted);
+  font-size: .91rem;
+  line-height: 1.45;
+  text-align: right;
+}
+
+/* Questions */
+
+.proposal-drawer .decision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.proposal-drawer .decision-card {
+  min-height: 218px;
+  padding: 23px 24px;
+  border: 1px solid rgba(0, 96, 142, .12);
+  border-radius: 21px;
+  background: rgba(255, 255, 255, .58);
+}
+
+.proposal-drawer .decision-card > span {
+  display: inline-grid;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  color: #006f9f;
+  background: rgba(0, 166, 224, .11);
+  font-size: .73rem;
+  font-weight: 900;
+}
+
+.proposal-drawer .decision-card h4 {
+  margin: 0 0 10px;
+  color: var(--proposal-ink);
+  font-size: 1.08rem;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+
+.proposal-drawer .decision-card p {
+  margin: 0;
+  color: var(--proposal-muted);
+  font-size: .94rem;
+  font-weight: 500;
+  line-height: 1.48;
+}
+
+/* Five moves */
+
+.proposal-drawer .step-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.proposal-drawer .step-card {
+  position: relative;
+  grid-column: span 4;
+  min-height: 322px;
+  padding: 25px;
+  overflow: hidden;
+  border: 1px solid var(--proposal-line);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 15px 38px rgba(0, 60, 113, .07);
+}
+
+.proposal-drawer .step-card:nth-child(4),
+.proposal-drawer .step-card:nth-child(5) {
+  grid-column: span 6;
+  min-height: 282px;
+}
+
+.proposal-drawer .step-card::after {
+  content: "";
+  position: absolute;
+  right: -54px;
+  bottom: -62px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 166, 224, .12),
+      transparent 68%
+    );
+}
+
+.proposal-drawer .step-number {
+  display: block;
+  margin-bottom: 27px;
+  color: #0a5b8d;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.06em;
+}
+
+.proposal-drawer .step-card h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 390px;
+  margin: 8px 0 11px;
+  color: var(--proposal-ink);
+  font-size: clamp(1.25rem, 1.7vw, 1.62rem);
+  line-height: 1.06;
+  letter-spacing: -.035em;
+}
+
+.proposal-drawer .step-card p:not(.step-label) {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--proposal-muted);
+  font-size: .93rem;
+  line-height: 1.48;
+}
+
+.proposal-drawer .activity {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 96, 142, .11);
+}
+
+.proposal-drawer .activity-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: .66rem;
+  letter-spacing: .12em;
+}
+
+.proposal-drawer .step-card .activity p {
+  color: rgba(6, 27, 42, .7);
+  font-size: .84rem;
+  line-height: 1.45;
+}
+
+/* Outcomes */
+
+.proposal-drawer .outcome-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.proposal-drawer .outcome-card {
+  min-height: 134px;
+  padding: 20px;
+  border: 1px solid rgba(0, 96, 142, .12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .7);
+}
+
+.proposal-drawer .outcome-check {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  color: #006f9f;
+  background: rgba(0, 166, 224, .12);
+  font-weight: 900;
+}
+
+.proposal-drawer .outcome-card p {
+  margin: 0;
+  color: var(--proposal-ink);
+  font-size: .88rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+/* Bottom section */
+
+.proposal-drawer .drawer-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.proposal-drawer .ai-note,
+.proposal-drawer .takeaway {
+  padding: 24px 26px;
+  border-radius: 24px;
+}
+
+.proposal-drawer .ai-note {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, .78);
+  background: linear-gradient(135deg, #06243f, #07567c);
+}
+
+.proposal-drawer .ai-icon {
+  flex: 0 0 auto;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(126, 231, 255, .3);
+  border-radius: 50%;
+  color: #7ee7ff;
+  background: rgba(255, 255, 255, .07);
+  font-size: 1.2rem;
+}
+
+.proposal-drawer .ai-note strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.proposal-drawer .ai-note p,
+.proposal-drawer .takeaway p {
+  margin: 0;
+  font-size: .91rem;
+  line-height: 1.48;
+}
+
+.proposal-drawer .takeaway {
+  border: 1px solid rgba(0, 96, 142, .12);
+  color: var(--proposal-muted);
+  background: rgba(255, 255, 255, .7);
+}
+
+.proposal-drawer .takeaway-label {
+  margin-bottom: 8px;
+}
+
+.proposal-drawer .takeaway strong {
+  color: var(--proposal-ink);
+}
+
+/* Responsive */
+
+@media (max-width: 940px) {
+  .proposal-drawer .drawer-head,
+  .proposal-drawer .drawer-bottom,
+  .proposal-drawer .engagement-premise {
+    grid-template-columns: 1fr;
+  }
+
+  .proposal-drawer .decision-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proposal-drawer .step-card {
+    grid-column: span 6;
+  }
+
+  .proposal-drawer .step-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .proposal-drawer .outcome-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proposal-drawer .outcome-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .proposal-drawer-inner {
+    width: calc(100% - 12px);
+    padding: 56px 20px 34px;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .proposal-drawer .drawer-head {
+    padding-right: 0;
+  }
+
+  .proposal-drawer .section-head {
+    display: block;
+  }
+
+  .proposal-drawer .section-head > p {
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .proposal-drawer .decision-grid,
+  .proposal-drawer .outcome-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proposal-drawer .step-card,
+  .proposal-drawer .step-card:nth-child(4),
+  .proposal-drawer .step-card:nth-child(5),
+  .proposal-drawer .step-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 0;
+  }
+
+  .proposal-drawer .outcome-card:last-child {
+    grid-column: auto;
+  }
+
+  .proposal-drawer .ai-note {
+    display: block;
+  }
+
+  .proposal-drawer .ai-icon {
+    margin-bottom: 14px;
+  }
+}
   </style>
 </head>
 <body>
@@ -3036,79 +3482,297 @@ body.proposal-open {
 </div>
     </section>
 
-    <!--proposal section-->
-     <div class="proposal-backdrop" hidden></div>
+<!--proposal bottom drawer section-->
+  <div class="proposal-backdrop" hidden></div>
 
-<aside class="proposal-drawer" aria-hidden="true" aria-labelledby="proposalDrawerTitle" role="dialog">
+<aside
+  class="proposal-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="proposal-title"
+>
   <div class="proposal-drawer-inner">
-    <button class="proposal-drawer-close" type="button" aria-label="Close proposal drawer">
+    <button class="proposal-drawer-close" type="button" aria-label="Close">
       ×
     </button>
 
-    <div class="proposal-eyebrow">Proposal</div>
+    <div class="drawer-head">
+      <div>
+        <p class="drawer-kicker">A potential path forward</p>
+        <h2 class="drawer-title" id="proposal-title">
+          What could we do next?
+        </h2>
+      </div>
 
-    <h2 id="proposalDrawerTitle">CardioConnect 2.0 Discovery + Build</h2>
-
-    <p class="proposal-lead">
-      A focused engagement to help BSC evaluate, validate, and prepare the next wave of CardioConnect capabilities — building from the MVP foundation toward a more connected field operating model.
-    </p>
-
-    <div class="proposal-stats">
-      <article>
-        <strong>6–8 weeks</strong>
-        <span>Initial engagement placeholder</span>
-      </article>
-
-      <article>
-        <strong>Cross-functional</strong>
-        <span>Product, field, IT, architecture, change</span>
-      </article>
-
-      <article>
-        <strong>Build-ready</strong>
-        <span>Validated concepts, priorities, and next steps</span>
-      </article>
+      <p class="drawer-lead">
+        If this future-state direction feels worth exploring, Slalom could
+        help BSC move from vision to action—validating the highest-value
+        opportunities, pressure-testing the field workflow, and identifying
+        the experience and platform decisions needed for CardioConnect’s
+        next phase.
+      </p>
     </div>
 
-    <div class="proposal-content-grid">
-      <section class="proposal-block">
-        <h3>Engagement purpose</h3>
+    <section class="engagement-premise">
+      <div>
+        <p class="section-label">Engagement objective</p>
+        <h3>Turn the vision into an evidence-backed direction.</h3>
+      </div>
+
+      <p>
+        The work would help BSC determine which connected field capabilities
+        are worth advancing, how they should work across AFS and CRM, and what
+        experience, data, and platform choices would enable them—without
+        prematurely locking into a solution or implementation path.
+      </p>
+    </section>
+
+    <section class="decision-section">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Questions to resolve</p>
+          <h3>The decisions behind the vision</h3>
+        </div>
+
         <p>
-          Help BSC determine which future-state CardioConnect capabilities are most valuable, feasible, and ready to pursue next.
+          The goal is not to validate every idea. It is to identify where a
+          connected experience can create the most meaningful field and
+          business value.
         </p>
-      </section>
+      </div>
 
-      <section class="proposal-block">
-        <h3>What we would do</h3>
-        <ul>
-          <li>Validate priority future-state scenarios across CRM, EP, and Watchman.</li>
-          <li>Assess platform, data, and integration implications.</li>
-          <li>Prototype the highest-value workflow moments.</li>
-          <li>Identify capability sequencing, dependencies, and decision points.</li>
-        </ul>
-      </section>
+      <div class="decision-grid">
+        <article class="decision-card">
+          <span>01</span>
+          <h4>Operating model</h4>
+          <p>
+            Which case moments should work consistently across CRM, EP, and
+            Watchman, and where is specialization essential?
+          </p>
+        </article>
 
-      <section class="proposal-block">
-        <h3>Where AI acceleration could help</h3>
+        <article class="decision-card">
+          <span>02</span>
+          <h4>Experience boundary</h4>
+          <p>
+            Can ServiceMax Go and Salesforce support the desired experience,
+            or does differentiated field work justify a custom mobile layer?
+          </p>
+        </article>
+
+        <article class="decision-card">
+          <span>03</span>
+          <h4>System of record</h4>
+          <p>
+            How should work orders, procedures, therapies, devices, teams,
+            and downstream records connect without duplicating truth?
+          </p>
+        </article>
+
+        <article class="decision-card">
+          <span>04</span>
+          <h4>Field security</h4>
+          <p>
+            What patient or hospital information is truly required at each
+            moment, and what must never persist offline?
+          </p>
+        </article>
+
+        <article class="decision-card">
+          <span>05</span>
+          <h4>Value case</h4>
+          <p>
+            Which outcomes—coverage, documentation quality, inventory waste,
+            rep capacity, or account action—justify investment?
+          </p>
+        </article>
+
+        <article class="decision-card">
+          <span>06</span>
+          <h4>AI permission</h4>
+          <p>
+            Where can AI safely recommend, summarize, or prefill—and where
+            must regulated or clinical judgment remain explicitly human?
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="work-section">
+      <div class="section-head">
+        <div>
+          <p class="section-label">How we could approach it</p>
+          <h3>Five moves from vision to action</h3>
+        </div>
+
         <p>
-          AI-enabled synthesis, scenario generation, prototyping, and artifact creation could help the team move faster — while keeping the engagement centered on CardioConnect business value.
+          Each move builds evidence for the next, bringing field experience
+          and technical feasibility together as the direction takes shape.
         </p>
-      </section>
+      </div>
 
-      <section class="proposal-block">
-        <h3>Potential outputs</h3>
-        <ul>
-          <li>Validated future-state scenarios</li>
-          <li>Priority capability backlog</li>
-          <li>Prototype concepts or clickable experience moments</li>
-          <li>Platform and feasibility considerations</li>
-          <li>Implementation or pilot readiness recommendations</li>
-        </ul>
-      </section>
-    </div>
+      <div class="step-grid">
+        <article class="step-card">
+          <span class="step-number">01</span>
+          <p class="step-label">Focus</p>
+          <h3>Align on the opportunity</h3>
+          <p>
+            Identify which parts of the future vision matter most across AFS
+            and CRM, where the MVP creates momentum, and where BSC needs more
+            evidence before moving forward.
+          </p>
 
-    <div class="proposal-footer-note">
-      Final scope, timeline, team model, and deliverables to be defined in the formal proposal.
+          <div class="activity">
+            <span class="activity-label">In practice</span>
+            <p>
+              MVP evidence review, stakeholder alignment, opportunity
+              framing, and capability prioritization.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">02</span>
+          <p class="step-label">Validate</p>
+          <h3>Pressure-test the field workflow</h3>
+          <p>
+            Work with field leaders, clinical reps, schedulers, product, IT,
+            and architecture teams to test how intake, scheduling, readiness,
+            documentation, inventory, and insight should connect.
+          </p>
+
+          <div class="activity">
+            <span class="activity-label">In practice</span>
+            <p>
+              Field working sessions, scenario walkthroughs, workflow
+              mapping, and cross-division pattern identification.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">03</span>
+          <p class="step-label">Make tangible</p>
+          <h3>Prototype the critical moments</h3>
+          <p>
+            Create targeted concepts for the highest-value workflows,
+            including role-specific experiences, assistive interactions, and
+            division-specific variations where they matter.
+          </p>
+
+          <div class="activity">
+            <span class="activity-label">In practice</span>
+            <p>
+              Rapid concepts, role-based flows, AI-assisted interactions,
+              and iterative testing with field users.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">04</span>
+          <p class="step-label">Evaluate</p>
+          <h3>Assess platform and data fit</h3>
+          <p>
+            Explore what existing platforms can support, what may require
+            deeper integration, and where a custom or hybrid experience could
+            create differentiated value—without assuming a platform decision.
+          </p>
+
+          <div class="activity">
+            <span class="activity-label">In practice</span>
+            <p>
+              Platform capability mapping, data and integration assessment,
+              architecture options, and feasibility tradeoffs.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">05</span>
+          <p class="step-label">Move forward</p>
+          <h3>Define the next move</h3>
+          <p>
+            Clarify which opportunities are ready to pursue, which need more
+            validation, what should be piloted first, and what decisions BSC
+            needs to make before building.
+          </p>
+
+          <div class="activity">
+            <span class="activity-label">In practice</span>
+            <p>
+              Capability sequencing, pilot candidates, dependencies, open
+              decisions, and immediate next actions.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="outcomes-section">
+      <div class="section-head">
+        <div>
+          <p class="section-label">What BSC could leave with</p>
+          <h3>An actionable direction—not just a future-state concept</h3>
+        </div>
+
+        <p>
+          A shared body of evidence that connects the desired field experience
+          to the choices required to move it forward.
+        </p>
+      </div>
+
+      <div class="outcome-grid">
+        <article class="outcome-card">
+          <span class="outcome-check">✓</span>
+          <p>Prioritized opportunities and use cases</p>
+        </article>
+
+        <article class="outcome-card">
+          <span class="outcome-check">✓</span>
+          <p>Validated end-to-end field workflows</p>
+        </article>
+
+        <article class="outcome-card">
+          <span class="outcome-check">✓</span>
+          <p>Tangible, tested experience concepts</p>
+        </article>
+
+        <article class="outcome-card">
+          <span class="outcome-check">✓</span>
+          <p>Platform, data, and integration implications</p>
+        </article>
+
+        <article class="outcome-card">
+          <span class="outcome-check">✓</span>
+          <p>A recommended path and first move</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="drawer-bottom">
+      <div class="ai-note">
+        <span class="ai-icon" aria-hidden="true">✦</span>
+        <p>
+          <strong>
+            AI can accelerate the work without becoming the point of the work.
+          </strong>
+          Faster synthesis, scenario generation, prototyping, and artifact
+          creation can help the team explore more ground while staying
+          centered on field value, usability, and accountable decision-making.
+        </p>
+      </div>
+
+      <div class="takeaway">
+        <p class="takeaway-label">The result</p>
+        <p>
+          <strong>
+            Enough clarity to choose what to advance, what to learn next, and
+            where to begin—before committing to a build path.
+          </strong>
+        </p>
+      </div>
     </div>
   </div>
 </aside>
