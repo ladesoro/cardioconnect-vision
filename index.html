@@ -445,13 +445,11 @@
   position: absolute;
   top: 28px;
   left: 28px;
-
   width: 44px;
   height: 44px;
   border-radius: 999px;
   display: grid;
   place-items: center;
-
   background: rgba(0, 166, 224, .14);
   border: 1px solid rgba(0, 166, 224, .55);
   color: #7ee7ff;
@@ -2517,7 +2515,7 @@ body.proposal-open {
 
 .site-brand img {
   display: block;
-  width: 80px;
+  width: 120px;
   height: auto;
 }
 
@@ -2978,6 +2976,376 @@ body.proposal-open {
     margin-bottom: 14px;
   }
 }
+/* Implementation reality expandable columns */
+.implementation-expand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.implementation-expand-card {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 18px 48px rgba(0,0,0,.14);
+}
+
+.implementation-expand-head {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 24px 22px;
+}
+
+.implementation-expand-card.retain .implementation-expand-head {
+  color: #fff;
+  background: linear-gradient(135deg, #06243f, #003c71);
+}
+
+.implementation-expand-card.assess .implementation-expand-head {
+  color: #fff;
+  background: linear-gradient(135deg, #003c71, #00a6e0);
+}
+
+.implementation-expand-card.enable .implementation-expand-head {
+  color: #06243f;
+  background: linear-gradient(135deg, #cdf8ed, #62e6c4);
+}
+
+.implementation-step {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .78;
+}
+
+.implementation-step span {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: .7rem;
+}
+
+.implementation-expand-head h3 {
+  margin: 0 0 8px;
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  color: inherit;
+}
+
+.implementation-expand-head p {
+  margin: 0 0 22px;
+  color: inherit;
+  opacity: .76;
+  font-size: .9rem;
+  line-height: 1.42;
+}
+
+.implementation-expand-toggle {
+  margin-top: auto;
+  align-self: flex-start;
+  appearance: none;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  color: inherit;
+  padding: 9px 13px;
+  font: inherit;
+  font-size: .76rem;
+  font-weight: 850;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .18s ease, background .18s ease, opacity .18s ease;
+}
+
+.implementation-expand-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.24);
+}
+
+.implementation-example-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 18px;
+  list-style: none;
+  background: rgba(255,255,255,.92);
+}
+
+.implementation-example-list[hidden] {
+  display: none;
+}
+
+.implementation-example-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  min-height: 52px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  color: #10283c;
+  background: #f3f8fb;
+  font-size: .84rem;
+  font-weight: 500;
+  line-height: 1.32;
+}
+
+.implementation-example-list li strong {
+  color: #003c71;
+  font-weight: 850;
+}
+
+.implementation-example-list li::before {
+  content: "✓";
+  display: grid;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #00a6e0;
+  font-size: .65rem;
+  font-weight: 900;
+}
+
+.implementation-expand-card.assess .implementation-example-list li::before {
+  content: "→";
+  background: #003c71;
+}
+
+.implementation-expand-card.enable .implementation-example-list li::before {
+  content: "+";
+  color: #003c71;
+  background: #62e6c4;
+}
+
+@media (max-width: 980px) {
+  .implementation-expand-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .implementation-expand-head {
+    min-height: 0;
+  }
+}
+/* Fix bolded implementation examples so text wraps like normal sentences */
+.implementation-example-list li {
+  position: relative !important;
+  display: block !important;
+  grid-template-columns: none !important;
+  padding: 13px 14px 13px 42px !important;
+  text-align: left !important;
+}
+
+.implementation-example-list li::before {
+  position: absolute !important;
+  left: 14px;
+  top: 14px;
+  margin: 0 !important;
+}
+
+.implementation-example-list li strong {
+  display: inline !important;
+  color: #003c71;
+  font-weight: 850;
+}
+/* Maturity capability roadmap expansion */
+#maturity .maturity-roadmap-wrap {
+  margin-top: clamp(34px, 5vw, 64px);
+  display: grid;
+  justify-items: center;
+}
+
+#maturity .maturity-roadmap-toggle {
+  appearance: none;
+  border: 1px solid rgba(0, 96, 142, .18);
+  background: rgba(255,255,255,.78);
+  color: #005f88;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 900;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 16px 40px rgba(0, 60, 113, .10);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+#maturity .maturity-roadmap-toggle:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.96);
+  border-color: rgba(0,166,224,.34);
+  box-shadow: 0 20px 50px rgba(0,166,224,.14);
+}
+
+#maturity .maturity-roadmap-panel {
+  width: 100%;
+  margin-top: clamp(30px, 4vw, 48px);
+}
+
+#maturity .maturity-roadmap-panel[hidden] {
+  display: none;
+}
+
+#maturity .maturity-roadmap-head {
+  max-width: 820px;
+  margin: 0 auto clamp(24px, 3vw, 34px);
+  text-align: center;
+}
+
+#maturity .maturity-roadmap-head .kicker {
+  margin-bottom: 12px;
+  color: #006f9f;
+}
+
+#maturity .maturity-roadmap-head h3 {
+  margin: 0;
+  color: #061b2a;
+  font-size: clamp(1.6rem, 2.7vw, 2.6rem);
+  line-height: 1.04;
+  letter-spacing: -.045em;
+}
+
+#maturity .maturity-roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+#maturity .maturity-roadmap-card {
+  overflow: hidden;
+  border-radius: 26px;
+  background: rgba(255,255,255,.76);
+  border: 1px solid rgba(0, 96, 142, .12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.86),
+    0 18px 46px rgba(0, 60, 113, .08);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+#maturity .maturity-roadmap-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,166,224,.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 24px 60px rgba(0, 60, 113, .13);
+}
+
+#maturity .maturity-roadmap-card-top {
+  padding: 26px 24px 20px;
+  border-bottom: 1px solid rgba(0, 96, 142, .10);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(0,166,224,.12), transparent 18rem),
+    rgba(255,255,255,.56);
+}
+
+#maturity .roadmap-phase {
+  display: block;
+  margin-bottom: 14px;
+  color: #006f9f;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+#maturity .maturity-roadmap-card h4 {
+  margin: 0 0 9px;
+  color: #061b2a;
+  font-size: clamp(1.15rem, 1.45vw, 1.36rem);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+#maturity .maturity-roadmap-card p {
+  margin: 0;
+  color: rgba(6, 27, 42, .62);
+  font-size: .9rem;
+  line-height: 1.42;
+}
+
+#maturity .maturity-roadmap-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 18px;
+  list-style: none;
+}
+
+#maturity .maturity-roadmap-list li {
+  position: relative;
+  padding: 11px 12px 11px 30px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0, 96, 142, .08);
+  color: rgba(6, 27, 42, .76);
+  font-size: .86rem;
+  font-weight: 500;
+  line-height: 1.32;
+}
+
+#maturity .maturity-roadmap-list li::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 17px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00a6e0;
+}
+
+#maturity .maturity-roadmap-note {
+  max-width: 800px;
+  margin: 24px auto 0;
+  text-align: center;
+  color: rgba(6, 27, 42, .58);
+  font-size: .86rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  #maturity .maturity-roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Align maturity stage card content to the top */
+#maturity .mm-stage-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+#maturity .mm-stage-card h3,
+#maturity .mm-stage-card p,
+#maturity .mm-stage-card .mm-chip-row {
+  align-self: flex-start !important;
+}
+/* Make maturity stage cards shorter now that chips are hidden */
+#maturity .mm-stage-card {
+  min-height: 250px !important;
+  padding-bottom: 15px !important;
+}
+
+#maturity .mm-chip-row {
+  display: none !important;
+}
   </style>
 </head>
 <body>
@@ -3128,7 +3496,7 @@ body.proposal-open {
         <div>
           <p class="kicker">Why the MVP matters</p>
           <h2>The current MVP creates the foundation for what comes next.</h2>
-          <p class="lead">CardioConnect’s first release gives BSC a shared scheduling and assignment layer. The future vision extends that foundation across the moments before, during, and after each case.</p>
+          <p class="lead">The MVP validated the need for a shared scheduling and assignment layer. It also created the workflow context, operating patterns, and visibility needed to determine where CardioConnect should extend, and where a more tailored experience could create differentiated value.</p>
         </div>
         <div class="foundation-proof" aria-label="MVP foundation proof points">
           <div class="proof-card"><strong>Shared work intake</strong><span>A more consistent way to create procedure, non-procedure, and unavailable-time work.</span></div>
@@ -3221,9 +3589,9 @@ body.proposal-open {
                 <p class="mm-stage-meta">Before MVP</p>
                 <h3>Fragmented</h3>
                 <p>Field work depends on manual coordination across systems, calendars, messages, spreadsheets, and tribal knowledge.</p>
-                <div class="mm-chips">
+               <!-- <div class="mm-chips">
                   <span class="mm-chip">Calls + texts</span><span class="mm-chip">Local spreadsheets</span><span class="mm-chip">Separate documentation</span><span class="mm-chip">Manual inventory follow-up</span>
-                </div>
+                </div>-->
               </button>
 
               <button class="mm-stage-card mvp active" data-stage="visible" type="button" role="tab" aria-selected="true">
@@ -3231,19 +3599,18 @@ body.proposal-open {
                 <p class="mm-stage-meta">MVP foundation</p>
                 <h3>Visible</h3>
                 <p>CardioConnect creates a shared scheduling and assignment layer for field teams, bringing work into a more consistent mobile operating model.</p>
-                <div class="mm-chips">
+                <!--<div class="mm-chips">
                   <span class="mm-chip mvp-chip">Common intake</span><span class="mm-chip mvp-chip">Assignment visibility</span><span class="mm-chip mvp-chip">Mobile schedule</span><span class="mm-chip mvp-chip">Team calendar</span>
-                </div>
+                </div>-->
               </button>
-
               <button class="mm-stage-card future" data-stage="connected" type="button" role="tab" aria-selected="false">
                 <div class="mm-stage-node">3</div>
-                <p class="mm-stage-meta">2.0 / 3.0</p>
+                <p class="mm-stage-meta">Next Phase</p>
                 <h3>Connected</h3>
                 <p>Scheduling connects to a more consistent case lifecycle and data model across CRM, EP, and Watchman — while still allowing division-specific details where needed.</p>
-                <div class="mm-chips">
+                <!--<div class="mm-chips">
                   <span class="mm-chip future-chip">Case readiness</span><span class="mm-chip future-chip">In-app documentation</span><span class="mm-chip future-chip">Consistent data model</span><span class="mm-chip future-chip">Replenishment triggers</span>
-                </div>
+                </div>-->
               </button>
 
               <button class="mm-stage-card future" data-stage="intelligent" type="button" role="tab" aria-selected="false">
@@ -3251,14 +3618,14 @@ body.proposal-open {
                 <p class="mm-stage-meta">Future horizon</p>
                 <h3>Intelligent</h3>
                 <p>Assist helps teams anticipate risk, recommend actions, balance field capacity, and turn operational activity into account insight.</p>
-                <div class="mm-chips">
+                <!--<div class="mm-chips">
                   <span class="mm-chip future-chip">Coverage recommendations</span><span class="mm-chip future-chip">Readiness risk</span><span class="mm-chip future-chip">Workload balancing</span><span class="mm-chip future-chip">Account signals</span>
-                </div>
+                </div>-->
               </button>
             </div>
           </div>
 
-          <section class="mm-proof-panel" aria-live="polite">
+        <section class="mm-proof-panel" aria-live="polite">
             <div>
               <p class="mm-proof-label" id="mmProofLabel">Current MVP foundation</p>
               <h3 class="mm-proof-title" id="mmProofTitle">What “visible” means in real field work</h3>
@@ -3266,10 +3633,89 @@ body.proposal-open {
             </div>
             <div class="mm-proof-grid" id="mmProofGrid"></div>
           </section>
+
+<!--capability roadmap exapnd-->
+          <div class="maturity-roadmap-wrap">
+  <button class="maturity-roadmap-toggle" type="button" aria-expanded="false" aria-controls="maturityRoadmapPanel">
+    View Capability Roadmap
+  </button>
+
+  <div class="maturity-roadmap-panel" id="maturityRoadmapPanel" hidden>
+    <div class="maturity-roadmap-head">
+      <p class="kicker">Capability roadmap</p>
+      <h3>A now-next-future view of the capabilities that could shape CardioConnect’s next phase.</h3>
+    </div>
+
+    <div class="maturity-roadmap-grid">
+      <article class="maturity-roadmap-card">
+        <div class="maturity-roadmap-card-top">
+          <span class="roadmap-phase">MVP Foundation</span>
+          <h4>Shared scheduling visibility</h4>
+          <p>Common scheduling workflows and operating layer established in the MVP.</p>
+        </div>
+
+        <ul class="maturity-roadmap-list">
+          <li>Common work intake</li>
+          <li>Team schedule visibility</li>
+          <li>Assignment and coverage status</li>
+          <li>Resource recommendations</li>
+          <li>Absence and availability management</li>
+          <li>Mobile schedule and team calendar</li>
+          <li>Custom Assignment Console</li>
+        </ul>
+      </article>
+
+      <article class="maturity-roadmap-card">
+        <div class="maturity-roadmap-card-top">
+          <span class="roadmap-phase">Next Phase</span>
+          <h4>Connected, tailored case lifecycle</h4>
+          <p>Prioritize the workflow moments where a tailored clinical experience can reduce friction.</p>
+        </div>
+
+        <ul class="maturity-roadmap-list">
+          <li>Faster intake, defaults, and templates</li>
+          <li>Case readiness and exception checks</li>
+          <li>Smarter coverage planning</li>
+          <li>Procedure record connection and prefill</li>
+          <li>Guided offline documentation</li>
+          <li>Barcode and document capture</li>
+          <li>Inventory use and replenishment triggers</li>
+          <li>Completion and downstream handoffs</li>
+        </ul>
+      </article>
+
+      <article class="maturity-roadmap-card">
+        <div class="maturity-roadmap-card-top">
+          <span class="roadmap-phase">Future Horizon</span>
+          <h4>Proactive field operations</h4>
+          <p>Preserve architectural options for capabilities that depend on trusted data and adoption.</p>
+        </div>
+
+        <ul class="maturity-roadmap-list">
+          <li>Customer-facing structured intake</li>
+          <li>Automated scheduling and trip planning</li>
+          <li>Predictive capacity and demand signals</li>
+          <li>Expiration-aware inventory optimization</li>
+          <li>Enterprise operational analytics</li>
+          <li>Conversational workflow assistance</li>
+          <li>Proactive recommendations and agents</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="maturity-roadmap-note">
+      These horizons are not approved release phases or committed scope. They are a way to discuss sequencing, dependency, and readiness.
+    </p>
+  </div>
+</div><!--capability roadmap expand end-->
+
         </div>
       </div>
     </section>
 
+    
+
+        <!--Hman moment video section-->
     <section class="section human-moment" id="field-moment">
       <video src="assets/cinematic/walk-cathlab-handshake.mp4" autoplay muted loop playsinline preload="metadata"></video>
       <div class="section-inner">
@@ -3281,6 +3727,7 @@ body.proposal-open {
       </div>
     </section>
 
+    <!--Outcomes section-->
     <section class="section outcomes" id="outcomes">
       <div class="section-inner">
        <div class="outcome-intro">
@@ -3296,7 +3743,7 @@ body.proposal-open {
         <span class="outcome-number">01</span>
         <span class="outcome-content">
           <h3>Inventory readiness</h3>
-          <p>Procedure completion can inform utilization, expiration opportunity, replenishment needs, and account-level readiness.</p>
+          <p>Connected and tailored data can inform device utilization, expiration, replenishment, and account-level readiness.</p>
           
         </span>
         <span class="flip-cue" aria-hidden="true">↻</span>
@@ -3315,8 +3762,8 @@ body.proposal-open {
       <span class="flip-face flip-front">
         <span class="outcome-number">02</span>
         <span class="outcome-content">
-          <h3>Account intelligence</h3>
-          <p>Field activity can become an account signal — helping territory leaders see demand patterns and prioritize outreach.</p>
+          <h3>Procedure lifecycle completion</h3>
+          <p>Case, account, and physician context can carry through prefill, templates, documentation quality, procedure completion, and downstream handoffs.</p>
           
         </span>
         <span class="flip-cue" aria-hidden="true">↻</span>
@@ -3324,8 +3771,8 @@ body.proposal-open {
 
       <span class="flip-face flip-back">
         <span class="flip-label">Field example</span>
-        <strong>Case activity → account opportunity</strong>
-        <p>“Dr. Karev’s LAAC volume is trending up and coincides with planned PTO of two preferred reps next month. Consider a planning conversation before next month’s block.”</p>
+        <strong>Case details → informed documentation</strong>
+        <p>“The uploaded face sheet, device barcodes, and programmer data have been added to the procedure record. Review the details for accuracy before submitting.”</p>
       </span>
     </span>
   </button>
@@ -3336,7 +3783,7 @@ body.proposal-open {
         <span class="outcome-number">03</span>
         <span class="outcome-content">
           <h3>Leadership visibility</h3>
-          <p>Connected workflows can provide cleaner visibility into coverage, workload, readiness, and operational friction.</p>
+          <p>Connected workflows can provide cleaner visibility into coverage, workload, regional capacity, and operational friction.</p>
         </span>
         <span class="flip-cue" aria-hidden="true">↻</span>
       </span>
@@ -3359,56 +3806,56 @@ body.proposal-open {
     <div class="more-value-grid" aria-label="Additional future value opportunities">
       <article class="value-opportunity">
         <span>04</span>
-        <h3>Customer-facing intake</h3>
-        <p>Let accounts submit structured procedure requests directly, reducing the need for field teams to collect and re-enter details.</p>
+        <h3>Customer-facing structured intake</h3>
+        <p>Accounts submit validated requests through an approved channel.</p>
       </article>
 
       <article class="value-opportunity">
         <span>05</span>
         <h3>Request completeness checks</h3>
-        <p>Flag missing information at the point of intake so teams spend less time chasing down details later.</p>
+        <p>Missing or inconsistent information is flagged before scheduling.</p>
       </article>
 
       <article class="value-opportunity">
         <span>06</span>
         <h3>Automated case creation</h3>
-        <p>Convert approved intake requests into draft cases or work items that can be reviewed, scheduled, and assigned.</p>
+        <p>Coverage, information, documentation, and inventory concerns surface before arrival.</p>
       </article>
 
       <article class="value-opportunity">
         <span>07</span>
         <h3>Case readiness checks</h3>
-        <p>Surface missing details, inventory gaps, documentation needs, or coverage risks before the rep arrives onsite.</p>
+        <p>Coverage, information, documentation, and inventory concerns surface before arrival.</p>
       </article>
 
       <article class="value-opportunity">
         <span>08</span>
-        <h3>Expiration-aware inventory use</h3>
-        <p>Identify opportunities to use appropriate inventory before it expires and reduce avoidable waste.</p>
+        <h3>Smarter coverage planning</h3>
+        <p>Recommendations consider qualifications, availability, proximity, workload, and account context.</p>
       </article>
 
       <article class="value-opportunity">
         <span>09</span>
-        <h3>Proactive replenishment signals</h3>
-        <p>Use scheduled and completed procedures to predict when account or trunk stock may fall below par.</p>
+        <h3>Procedure documentation quality</h3>
+        <p>Prefill, required-field guidance, templates, and completion checks reduce duplicate entry and errors.</p>
       </article>
 
       <article class="value-opportunity">
         <span>10</span>
-        <h3>Smarter coverage planning</h3>
-        <p>Recommend coverage based on skill fit, availability, proximity, workload, physician familiarity, and urgency.</p>
+        <h3>Completion and downstream handoffs</h3>
+        <p>Completed procedure data triggers documents, proof-of-delivery, pricing, billing, or other approved workflows.</p>
       </article>
 
       <article class="value-opportunity">
         <span>11</span>
-        <h3>Account demand signals</h3>
-        <p>Turn procedure activity and coverage patterns into signals that help territory leaders prioritize account follow-up.</p>
+        <h3>Cross-division workflow consistency</h3>
+        <p>Shared lifecycle patterns reduce application switching while preserving necessary CRM and AFS differences.</p>
       </article>
 
       <article class="value-opportunity">
         <span>12</span>
-        <h3>Regional capacity visibility</h3>
-        <p>Help regional managers and AVPs see where demand, staffing, workload, and coverage pressure may be misaligned.</p>
+        <h3>Account demand signals</h3>
+        <p>Leaders receive governed operational signals for planning and appropriate follow-up.</p>
       </article>
     </div>
   </div>
@@ -3422,49 +3869,69 @@ body.proposal-open {
         <h2>Future exploration should honor the stack BSC already has.</h2>
         <p class="lead">This vision is not a blanket replacement story. It is a way to evaluate which layers should remain packaged, which should integrate more deeply, and where custom or AI-enabled experiences could create differentiated value.</p>
 
-        <div class="system-card-row" aria-label="Implementation reality areas">
-          <article class="system-info-card">
-            <h3>Current foundation</h3>
-            <p>Systems and MVP capabilities that created the shared visibility layer.</p>
-            <div class="chip-cloud">
-              <span class="system-pill">ServiceMax Go</span>
-              <span class="system-pill">Salesforce</span>
-              <span class="system-pill">Intake forms</span>
-              <span class="system-pill">Assignment workflows</span>
-              <span class="system-pill">Mobile schedule</span>
-              <span class="system-pill">Team calendar</span>
-            </div>
-          </article>
+        <div class="system-card-row implementation-expand-grid" aria-label="Implementation reality areas">
+  <article class="implementation-expand-card retain">
+    <header class="implementation-expand-head">
+      <div class="implementation-step"><span>1</span> Start with what works</div>
+      <h3>Retain and leverage</h3>
+      <p>Preserve the enterprise foundations, investments, and trusted sources that should continue to anchor the experience.</p>
 
-          <article class="system-info-card">
-            <h3>Systems to assess</h3>
-            <p>Places where the case lifecycle intersects with existing BSC tools, data, and operating constraints.</p>
-            <div class="chip-cloud">
-              <span class="system-pill">AFS Procedure Worksheet</span>
-              <span class="system-pill">CRM IRIS REX</span>
-              <span class="system-pill">Device inventory systems</span>
-              <span class="system-pill">Reporting</span>
-              <span class="system-pill">Patient records</span>
-              <span class="system-pill">Physician context</span>
-              <span class="system-pill">Sales tools (Blueprint, CardioAI)</span>
-            </div>
-          </article>
+      <button class="implementation-expand-toggle" type="button" aria-expanded="false">
+        Show examples
+      </button>
+    </header>
 
-          <article class="system-info-card">
-            <h3>Future enablers</h3>
-            <p>Capabilities that can build from the MVP once work, context, and case outcomes are more connected.</p>
-            <div class="chip-cloud">
-              <span class="system-pill">Assist layer</span>
-              <span class="system-pill">Customer-facing intake</span>
-              <span class="system-pill">Scheduling automation</span>
-              <span class="system-pill">Readiness signals</span>
-              <span class="system-pill">Barcode capture</span>
-              <span class="system-pill">Document extraction</span>
-              <span class="system-pill">Concomitant scheduling & documentation</span>
-           
-            </div>
-          </article>
-        </div>
+    <ul class="implementation-example-list" hidden>
+      <li>Extend the CardioConnect scheduling and assignment <strong>foundation</strong></li>
+      <li>Leverage <strong>Salesforce</strong> data, identity, access, and security controls</li>
+      <li>Reuse proven procedure and enterprise <strong>data models</strong></li>
+      <li>Build on existing ETL, API, and enterprise <strong>integration</strong> capabilities</li>
+      <li>Preserve product, physician, facility, and inventory <strong>systems</strong> of record</li>
+    </ul>
+  </article>
+
+  <article class="implementation-expand-card assess">
+    <header class="implementation-expand-head">
+      <div class="implementation-step"><span>2</span> Define the right fit</div>
+      <h3>Evaluate and integrate</h3>
+      <p>Assess the systems, workflow boundaries, and experience decisions required for the next connected lifecycle.</p>
+
+      <button class="implementation-expand-toggle" type="button" aria-expanded="false">
+        Show examples
+      </button>
+    </header>
+
+    <ul class="implementation-example-list" hidden>
+      <li>Define <strong>cross-division procedure workflows</strong> and shared requirements</li>
+      <li>Integrate <strong>CRM IRIS REX</strong> capabilities with the shared procedure data model</li>
+      <li>Review <strong>AFS procedure workflows</strong> and field documentation needs</li>
+      <li>Connect <strong>device inventory systems</strong> and product context</li>
+      <li>Define <strong>patient-record integration</strong> and offline data boundaries</li>
+      <li>Assess the <strong>BSC Digital Health Platform</strong> for tailored application development</li>
+    </ul>
+  </article>
+
+  <article class="implementation-expand-card enable">
+    <header class="implementation-expand-head">
+      <div class="implementation-step"><span>3</span> Enable the horizon</div>
+      <h3>Future enablers</h3>
+      <p>Introduce advanced capabilities as the workflow, architecture, data, and governance become ready.</p>
+
+      <button class="implementation-expand-toggle" type="button" aria-expanded="false">
+        Show examples
+      </button>
+    </header>
+
+    <ul class="implementation-example-list" hidden>
+      <li><strong>Offline</strong> synchronization, recovery, and conflict management</li>
+      <li>Scheduling <strong>automation</strong> and case-readiness orchestration</li>
+      <li>Barcode, image, and document <strong>capture</strong></li>
+      <li>Document extraction, generation, and <strong>downstream handoffs</strong></li>
+      <li><strong>Inventory</strong> readiness and replenishment signals</li>
+      <li>Governed <strong>AI services</strong> with observability, auditability, and human review</li>
+    </ul>
+  </article>
+</div>
       </div>
     </section>
 
@@ -3808,7 +4275,7 @@ body.proposal-open {
         ]
       },
       connected: {
-        label: "CardioConnect 2.0 / 3.0",
+        label: "Next Phase",
         title: "What “connected” could unlock next",
         copy: "This is where the experience moves beyond schedule visibility. The case becomes a more consistent cardiology-wide lifecycle and data model that carries context across CRM, EP, and Watchman while allowing division-specific details where needed.",
         items: [
@@ -4025,6 +4492,38 @@ document.addEventListener("keydown", (event) => {
     closeProposalDrawer();
   }
 });
+document.querySelectorAll(".implementation-expand-card").forEach((card) => {
+  const button = card.querySelector(".implementation-expand-toggle");
+  const list = card.querySelector(".implementation-example-list");
+
+  if (!button || !list) return;
+
+  button.addEventListener("click", () => {
+    const isOpen = button.getAttribute("aria-expanded") === "true";
+
+    button.setAttribute("aria-expanded", String(!isOpen));
+    list.hidden = isOpen;
+    button.textContent = isOpen ? "Show examples" : "Hide examples";
+  });
+});
+const maturityRoadmapToggle = document.querySelector(".maturity-roadmap-toggle");
+const maturityRoadmapPanel = document.querySelector("#maturityRoadmapPanel");
+
+if (maturityRoadmapToggle && maturityRoadmapPanel) {
+  maturityRoadmapToggle.addEventListener("click", () => {
+    const isOpen = maturityRoadmapToggle.getAttribute("aria-expanded") === "true";
+
+    maturityRoadmapToggle.setAttribute("aria-expanded", String(!isOpen));
+    maturityRoadmapPanel.hidden = isOpen;
+    maturityRoadmapToggle.textContent = isOpen
+      ? "View Capability Roadmap"
+      : "Hide Capability Roadmap";
+
+    if (!isOpen) {
+      maturityRoadmapPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  });
+}
   </script>
  
 </body>
