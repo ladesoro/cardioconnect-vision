@@ -84,7 +84,7 @@
     /* Hero */
     .hero {
       min-height: 100svh;
-      padding: 0;
+  padding-top: 50px;
       display: grid;
       place-items: stretch;
       background: #020912;
@@ -3346,6 +3346,241 @@ body.proposal-open {
 #maturity .mm-chip-row {
   display: none !important;
 }
+/* Hero business levers */
+.hero-levers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.hero-lever {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 999px;
+  background: rgba(2, 9, 18, .28);
+  color: rgba(255,255,255,.86);
+  padding: 13px 18px;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 850;
+  letter-spacing: .01em;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(0,0,0,.14);
+  backdrop-filter: blur(12px);
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease;
+}
+
+.hero-lever::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #00a6e0;
+  box-shadow: 0 0 0 5px rgba(0,166,224,.13);
+}
+
+.hero-lever:hover {
+  transform: translateY(-2px);
+  border-color: rgba(126,231,255,.46);
+  background: rgba(255,255,255,.11);
+  color: #fff;
+}
+
+.hero-lever.is-active {
+  background: #7ee7ff;
+  border-color: #7ee7ff;
+  color: #062f46;
+  box-shadow: 0 20px 48px rgba(0,166,224,.28);
+}
+
+.hero-lever.is-active::before {
+  background: #062f46;
+  box-shadow: 0 0 0 5px rgba(6,47,70,.12);
+}
+
+.hero-lever-detail {
+  max-width: 780px;
+  margin-top: 18px;
+  padding: 22px 24px;
+  border-radius: 24px;
+  background: rgba(2, 9, 18, .34);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 20px 52px rgba(0,0,0,.18);
+  backdrop-filter: blur(14px);
+}
+
+.hero-lever-detail-kicker {
+  margin-bottom: 8px;
+  color: #7ee7ff;
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.hero-lever-detail h3 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: clamp(1.25rem, 1.7vw, 1.6rem);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.hero-lever-detail p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+  font-size: clamp(.96rem, 1.08vw, 1.08rem);
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .hero-levers {
+    gap: 10px;
+  }
+
+  .hero-lever {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero-lever-detail {
+    padding: 20px;
+  }
+}
+.hero-lever-detail[hidden] {
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-lever-detail {
+  min-height: 80px;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+.hero-lever-detail:not([hidden]) {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Prevent hero content from shifting when lever detail opens */
+.hero-lever-detail {
+  box-sizing: border-box;
+  height: 156px !important;
+  min-height: 156px !important;
+  max-height: 156px !important;
+  overflow: hidden;
+}
+
+.hero-lever-detail[hidden] {
+  display: block !important;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-lever-detail:not([hidden]) {
+  visibility: visible;
+  opacity: 1;
+}
+/* Make hero video/background stretch with the expanded hero height */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #020912;
+}
+
+.hero video,
+.hero .hero-video,
+.hero .hero-bg,
+.hero .hero-bg video,
+.hero .hero-media,
+.hero .hero-media video {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+/* Subtle business lever tags across the story */
+.business-lever-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.business-lever-label {
+  color: rgba(255,255,255,.48);
+  font-size: .62rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.business-lever-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(126,231,255,.20);
+  border-radius: 999px;
+  background: rgba(126,231,255,.08);
+  color: rgba(126,231,255,.92);
+  padding: 5px 9px;
+  font-size: .68rem;
+  font-weight: 850;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Light section version */
+#maturity .business-lever-label,
+.outcomes .business-lever-label {
+  color: rgba(6,27,42,.44);
+}
+
+#maturity .business-lever-pill,
+.outcomes .business-lever-pill {
+  color: #006f9f;
+  background: rgba(0,166,224,.08);
+  border-color: rgba(0,166,224,.18);
+}
+/* Roadmap-specific lever spacing */
+#maturity .maturity-roadmap-card-top .business-lever-row {
+  margin-top: 16px;
+}
+
+#maturity .maturity-roadmap-card-top .business-lever-label {
+  color: rgba(6,27,42,.42);
+}
+
+#maturity .maturity-roadmap-card-top .business-lever-pill {
+  font-size: .64rem;
+  padding: 5px 8px;
+}
+/* Outcome lever labels */
+.outcomes .outcome-lever-tag {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0,166,224,.18);
+  border-radius: 999px;
+  background: rgba(0,166,224,.08);
+  color: #006f9f;
+  padding: 6px 9px;
+  font-size: .64rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  line-height: 1;
+}
   </style>
 </head>
 <body>
@@ -3360,11 +3595,31 @@ body.proposal-open {
           <p class="kicker">Boston Scientific · Cardiology field scheduling & operations vision</p>
           <h1>The Future of CardioConnect</h1>
           <p class="lead">This is a point-of-view based on our deep CardioConnect knowledge about what MVP enables, what future capabilities are worth exploring, potential designs of the future experiences, and where to focus next to drive value.</p>
-          <div class="hero-badges" aria-label="Vision themes">
-            <span class="badge"><span class="badge-dot"></span>MVP foundation</span>
-            <span class="badge"><span class="badge-dot"></span>Connected case lifecycle</span>
-            <span class="badge"><span class="badge-dot"></span>AI-assisted action</span>
-          </div>
+        <div class="hero-levers" aria-label="Business levers">
+  <button class="hero-lever" type="button" data-lever="cost" aria-pressed="false">
+    Cost avoidance
+  </button>
+
+  <button class="hero-lever" type="button" data-lever="capacity" aria-pressed="false">
+    Capacity optimization
+  </button>
+
+  <button class="hero-lever" type="button" data-lever="productivity" aria-pressed="false">
+    Productivity
+  </button>
+
+  <button class="hero-lever" type="button" data-lever="growth" aria-pressed="false">
+    Growth enablement
+  </button>
+</div>
+
+<div class="hero-lever-detail" aria-live="polite" hidden>
+  <div class="hero-lever-detail-kicker">Business lever</div>
+  <h3 id="heroLeverTitle"></h3>
+  <p id="heroLeverDescription"></p>
+</div>
+
+
         </div>
       </div>
     </section>
@@ -3393,6 +3648,10 @@ body.proposal-open {
               <h3>Surface risk before it becomes disruption.</h3>
               <p>A manager or scheduler starts the day with an intelligent briefing that prioritizes urgent coverage, case readiness, and inventory needs across CRM, EP, and Watchman activity.</p>
               <p class="workflow-proof"><strong>What it proves:</strong> CardioConnect can evolve from a schedule viewer into an action surface.</p>
+              <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Business lever</span>
+  <span class="business-lever-pill">Capacity optimization</span>   <span class="business-lever-pill">Cost avoidance</span>
+</div>
             </div>
           </article>
 
@@ -3409,6 +3668,10 @@ body.proposal-open {
               <h3>Turn a coverage gap into a confident assignment.</h3>
               <p>Assist recommends qualified coverage using case context, availability, proximity, workload, and physician familiarity — while the field leader keeps final control.</p>
               <p class="workflow-proof"><strong>What it proves:</strong> AI supports judgment without removing human accountability.</p>
+              <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Business lever</span>
+  <span class="business-lever-pill">Capacity optimization</span>
+</div>
             </div>
           </article>
 
@@ -3425,6 +3688,10 @@ body.proposal-open {
               <h3>Give the rep a field-ready handoff.</h3>
               <p>Javier receives the new case with procedure details, physician context, inventory readiness, and the documentation path already connected.</p>
               <p class="workflow-proof"><strong>What it proves:</strong> An assignment can become an executable handoff, not another coordination thread.</p>
+              <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Business lever</span>
+  <span class="business-lever-pill">Productivity</span>   <span class="business-lever-pill">Cost avoidance</span>
+</div>
             </div>
           </article>
 
@@ -3441,6 +3708,11 @@ body.proposal-open {
               <h3>Carry the case through documentation.</h3>
               <p>Known case information flows into the procedure record, while scan and capture support helps complete documentation inside CardioConnect.</p>
               <p class="workflow-proof"><strong>What it proves:</strong> Scheduling becomes the front door to the full case record.</p>
+              <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Business lever</span>
+  <span class="business-lever-pill">Productivity</span>
+
+</div>
             </div>
           </article>
         </div>
@@ -3465,6 +3737,10 @@ body.proposal-open {
                   <h3>Evolve the calendar into an operations surface.</h3>
                   <p>Today’s MVP gives teams a familiar calendar view. The future can evolve into a live operations surface — showing coverage risk, capacity pressure, and recommended changes in the flow of the day.</p>
                   <p class="workflow-proof"><strong>What it proves:</strong> The field calendar can become a place to understand, decide, and act.</p>
+                  <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Business lever</span>
+  <span class="business-lever-pill">Capacity optimization</span>
+</div>
                 </div>
               </article>
 
@@ -3481,6 +3757,10 @@ body.proposal-open {
                   <h3>Turn connected activity into proactive engagement.</h3>
                   <p>Territory activity, coverage response, and account signals become context Jordan can use to prioritize physician outreach.</p>
                   <p class="workflow-proof"><strong>What it proves:</strong> The case lifecycle ends with informed customer action, not another report to interpret.</p>
+                  <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Business lever</span>
+  <span class="business-lever-pill">Growth enablement</span>
+</div>
                 </div>
               </article>
             </div>
@@ -3589,6 +3869,7 @@ body.proposal-open {
                 <p class="mm-stage-meta">Before MVP</p>
                 <h3>Fragmented</h3>
                 <p>Field work depends on manual coordination across systems, calendars, messages, spreadsheets, and tribal knowledge.</p>
+                
                <!-- <div class="mm-chips">
                   <span class="mm-chip">Calls + texts</span><span class="mm-chip">Local spreadsheets</span><span class="mm-chip">Separate documentation</span><span class="mm-chip">Manual inventory follow-up</span>
                 </div>-->
@@ -3599,6 +3880,7 @@ body.proposal-open {
                 <p class="mm-stage-meta">MVP foundation</p>
                 <h3>Visible</h3>
                 <p>CardioConnect creates a shared scheduling and assignment layer for field teams, bringing work into a more consistent mobile operating model.</p>
+               
                 <!--<div class="mm-chips">
                   <span class="mm-chip mvp-chip">Common intake</span><span class="mm-chip mvp-chip">Assignment visibility</span><span class="mm-chip mvp-chip">Mobile schedule</span><span class="mm-chip mvp-chip">Team calendar</span>
                 </div>-->
@@ -3608,6 +3890,7 @@ body.proposal-open {
                 <p class="mm-stage-meta">Next Phase</p>
                 <h3>Connected</h3>
                 <p>Scheduling connects to a more consistent case lifecycle and data model across CRM, EP, and Watchman — while still allowing division-specific details where needed.</p>
+              
                 <!--<div class="mm-chips">
                   <span class="mm-chip future-chip">Case readiness</span><span class="mm-chip future-chip">In-app documentation</span><span class="mm-chip future-chip">Consistent data model</span><span class="mm-chip future-chip">Replenishment triggers</span>
                 </div>-->
@@ -3618,7 +3901,8 @@ body.proposal-open {
                 <p class="mm-stage-meta">Future horizon</p>
                 <h3>Intelligent</h3>
                 <p>Assist helps teams anticipate risk, recommend actions, balance field capacity, and turn operational activity into account insight.</p>
-                <!--<div class="mm-chips">
+                
+<!--<div class="mm-chips">
                   <span class="mm-chip future-chip">Coverage recommendations</span><span class="mm-chip future-chip">Readiness risk</span><span class="mm-chip future-chip">Workload balancing</span><span class="mm-chip future-chip">Account signals</span>
                 </div>-->
               </button>
@@ -3652,6 +3936,11 @@ body.proposal-open {
           <span class="roadmap-phase">MVP Foundation</span>
           <h4>Shared scheduling visibility</h4>
           <p>Common scheduling workflows and operating layer established in the MVP.</p>
+          <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Levers</span>
+  <span class="business-lever-pill">Productivity</span>
+  <span class="business-lever-pill">Capacity optimization</span>
+</div>
         </div>
 
         <ul class="maturity-roadmap-list">
@@ -3670,6 +3959,11 @@ body.proposal-open {
           <span class="roadmap-phase">Next Phase</span>
           <h4>Connected, tailored case lifecycle</h4>
           <p>Prioritize the workflow moments where a tailored clinical experience can reduce friction.</p>
+           <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Levers</span>
+  <span class="business-lever-pill">Productivity</span>
+  <span class="business-lever-pill">Cost avoidance</span>
+</div>
         </div>
 
         <ul class="maturity-roadmap-list">
@@ -3689,6 +3983,11 @@ body.proposal-open {
           <span class="roadmap-phase">Future Horizon</span>
           <h4>Proactive field operations</h4>
           <p>Preserve architectural options for capabilities that depend on trusted data and adoption.</p>
+         <div class="business-lever-row" aria-label="Business levers">
+  <span class="business-lever-label">Levers</span>
+  <span class="business-lever-pill">Capacity optimization</span>
+  <span class="business-lever-pill">Growth enablement</span>
+</div>
         </div>
 
         <ul class="maturity-roadmap-list">
@@ -3743,9 +4042,10 @@ body.proposal-open {
       <span class="flip-face flip-front">
         <span class="outcome-number">01</span>
         <span class="outcome-content">
+          
           <h3>Procedure lifecycle completion</h3>
           <p>Case, account, and physician context can carry through prefill, templates, documentation quality, procedure completion, and downstream handoffs.</p>
-          
+       <br><span class="business-lever-label">Levers </span> <span class="outcome-lever-tag">Productivity</span>
         </span>
         <span class="flip-cue" aria-hidden="true">↻</span>
       </span>
@@ -3765,7 +4065,7 @@ body.proposal-open {
         <span class="outcome-content">
           <h3>Inventory readiness</h3>
           <p>Connected and tailored data can inform device utilization, expiration, replenishment, and account-level readiness.</p>
-          
+           <br><span class="business-lever-label">Levers </span> <span class="outcome-lever-tag">Cost avoidance</span>
         </span>
         <span class="flip-cue" aria-hidden="true">↻</span>
       </span>
@@ -3787,6 +4087,7 @@ body.proposal-open {
         <span class="outcome-content">
           <h3>Leadership visibility</h3>
           <p>Connected workflows can provide cleaner visibility into coverage, workload, regional capacity, and operational friction.</p>
+           <br><span class="business-lever-label">Levers </span> <span class="outcome-lever-tag">Capacity optimization</span>
         </span>
         <span class="flip-cue" aria-hidden="true">↻</span>
       </span>
@@ -4527,6 +4828,60 @@ if (maturityRoadmapToggle && maturityRoadmapPanel) {
     }
   });
 }
+const heroLeverContent = {
+  cost: {
+    title: "Cost avoidance",
+    description:
+      "Connect scheduled cases, documented device use, expiration risk, par levels, and replenishment signals so teams can act before product expires or stock falls below need."
+  },
+  capacity: {
+    title: "Capacity optimization",
+    description:
+      "Give leaders better visibility into rep workload, availability, geography, qualifications, case demand, and coverage pressure so work can be balanced before adding headcount."
+  },
+  productivity: {
+    title: "Productivity",
+    description:
+      "Reduce manual coordination and duplicate entry across intake, scheduling, prep, documentation, and downstream handoffs."
+  },
+  growth: {
+    title: "Growth enablement",
+    description:
+      "Turn field activity, procedure volume, coverage patterns, physician context, and account signals into insight that helps teams prioritize customer follow-up."
+  }
+};
+
+const heroLeverButtons = document.querySelectorAll(".hero-lever");
+const heroLeverDetail = document.querySelector(".hero-lever-detail");
+const heroLeverTitle = document.querySelector("#heroLeverTitle");
+const heroLeverDescription = document.querySelector("#heroLeverDescription");
+
+heroLeverButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const isAlreadyActive = button.classList.contains("is-active");
+    const lever = button.dataset.lever;
+    const content = heroLeverContent[lever];
+
+    heroLeverButtons.forEach((item) => {
+      item.classList.remove("is-active");
+      item.setAttribute("aria-pressed", "false");
+    });
+
+    if (isAlreadyActive) {
+      if (heroLeverDetail) heroLeverDetail.hidden = true;
+      return;
+    }
+
+    if (!content || !heroLeverDetail || !heroLeverTitle || !heroLeverDescription) return;
+
+    button.classList.add("is-active");
+    button.setAttribute("aria-pressed", "true");
+
+    heroLeverTitle.textContent = content.title;
+    heroLeverDescription.textContent = content.description;
+    heroLeverDetail.hidden = false;
+  });
+});
   </script>
  
 </body>
