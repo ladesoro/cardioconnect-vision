@@ -3670,6 +3670,61 @@ body.proposal-open {
     max-width: 88vw !important;
   }
 }
+
+
+/* Minimal Why Now reveal inside proposal drawer */
+.drawer-lead-wrap {
+  display: grid;
+  gap: 10px;
+}
+
+.why-now-reveal {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+
+.why-now-toggle {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #006f9f;
+  padding: 0;
+  font: inherit;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.why-now-toggle::after {
+  content: "+";
+  display: inline-block;
+  margin-left: 7px;
+  color: #00a6e0;
+  font-weight: 900;
+}
+
+.why-now-toggle:hover {
+  color: #003c71;
+}
+
+.why-now-toggle[aria-expanded="true"]::after {
+  content: "–";
+}
+
+.why-now-panel {
+  margin: 0;
+  max-width: 520px;
+  color: rgba(6, 27, 42, .58);
+  font-size: .84rem;
+  line-height: 1.42;
+}
+
+.why-now-panel[hidden] {
+  display: none;
+}
   </style>
 </head>
 <body>
@@ -4357,30 +4412,43 @@ body.proposal-open {
 
     <div class="drawer-head">
       <div>
-        <p class="drawer-kicker">A potential path forward</p>
+        <p class="drawer-kicker">What's next</p>
         <h2 class="drawer-title" id="proposal-title">
-          What could we do next?
+          Define what CardioConnect becomes
         </h2>
       </div>
 
-      <p class="drawer-lead">
-        If this future-state direction feels worth exploring, Slalom could
-        help BSC move from vision to action—validating the highest-value
-        opportunities, pressure-testing the field workflow, and identifying
-        the experience and platform decisions needed for CardioConnect’s
-        next phase.
-      </p>
+   <div class="drawer-lead-wrap">
+  <p class="drawer-lead">
+    CardioConnect has established a shared scheduling and assignment foundation. 
+    The next decision is how far the product should extend beyond scheduling — 
+    across procedure management, inventory readiness, field capacity, account insight, 
+    and future franchise needs.
+  </p>
+
+  <div class="why-now-reveal">
+    <button class="why-now-toggle" type="button" aria-expanded="false" aria-controls="whyNowPanel">
+      Why now?
+    </button>
+
+    <p class="why-now-panel" id="whyNowPanel" hidden>
+      AOP planning is approaching, roadmap priorities are taking shape, and longer-horizon 
+      opportunities like CRM, ICVT, procedure management, and workflow orchestration need 
+      discovery before they become build decisions.
+    </p>
+  </div>
+</div>
     </div>
 
     <section class="engagement-premise">
       <div>
-        <p class="section-label">Engagement objective</p>
+        <p class="section-label">Future-state workstream</p>
         <h3>Turn the vision into an evidence-backed direction.</h3>
       </div>
 
       <p>
-        The work would help BSC determine which connected field capabilities
-        are worth advancing, how they should work across AFS and CRM, and what
+        This workstream helps BSC determine which connected field capabilities
+        are worth advancing, how they should work across AFS, CRM, and ICVT, and what
         experience, data, and platform choices would enable them—without
         prematurely locking into a solution or implementation path.
       </p>
@@ -4390,11 +4458,11 @@ body.proposal-open {
       <div class="section-head">
         <div>
           <p class="section-label">Questions to resolve</p>
-          <h3>The decisions behind the vision</h3>
+          <h3>Address the decisions that shape the vision</h3>
         </div>
 
         <p>
-          The goal is not to validate every idea. It is to identify where a
+          The goal is to identify where a
           connected experience can create the most meaningful field and
           business value.
         </p>
@@ -4405,14 +4473,14 @@ body.proposal-open {
           <span>01</span>
           <h4>Operating model</h4>
           <p>
-            Which case moments should work consistently across CRM, EP, and
-            Watchman, and where is specialization essential?
+            Which case moments should work consistently across CRM, EP,
+            Watchman, and ICVT, and where is specialization essential?
           </p>
         </article>
 
         <article class="decision-card">
           <span>02</span>
-          <h4>Experience boundary</h4>
+          <h4>Experience and platform boundary</h4>
           <p>
             Can ServiceMax Go and Salesforce support the desired experience,
             or does differentiated field work justify a custom mobile layer?
@@ -4421,7 +4489,7 @@ body.proposal-open {
 
         <article class="decision-card">
           <span>03</span>
-          <h4>System of record</h4>
+          <h4>Data and system of record</h4>
           <p>
             How should work orders, procedures, therapies, devices, teams,
             and downstream records connect without duplicating truth?
@@ -4430,7 +4498,7 @@ body.proposal-open {
 
         <article class="decision-card">
           <span>04</span>
-          <h4>Field security</h4>
+          <h4>Security & offline boundaries</h4>
           <p>
             What patient or hospital information is truly required at each
             moment, and what must never persist offline?
@@ -4439,7 +4507,7 @@ body.proposal-open {
 
         <article class="decision-card">
           <span>05</span>
-          <h4>Value case</h4>
+          <h4>Business value case</h4>
           <p>
             Which outcomes—coverage, documentation quality, inventory waste,
             rep capacity, or account action—justify investment?
@@ -4448,7 +4516,7 @@ body.proposal-open {
 
         <article class="decision-card">
           <span>06</span>
-          <h4>AI permission</h4>
+          <h4>AI permission model</h4>
           <p>
             Where can AI safely recommend, summarize, or prefill—and where
             must regulated or clinical judgment remain explicitly human?
@@ -4460,12 +4528,12 @@ body.proposal-open {
     <section class="work-section">
       <div class="section-head">
         <div>
-          <p class="section-label">How we could approach it</p>
-          <h3>Five moves from vision to action</h3>
+          <p class="section-label">The Approach</p>
+          <h3>Conduct the discovery and design work needed to make the vision actionable</h3>
         </div>
 
-        <p>
-          Each move builds evidence for the next, bringing field experience
+       <p>
+          Each phase builds evidence for the next, bringing field experience
           and technical feasibility together as the direction takes shape.
         </p>
       </div>
@@ -4474,7 +4542,7 @@ body.proposal-open {
         <article class="step-card">
           <span class="step-number">01</span>
           <p class="step-label">Focus</p>
-          <h3>Align on the opportunity</h3>
+          <h3>Align on the vision</h3>
           <p>
             Identify which parts of the future vision matter most across AFS
             and CRM, where the MVP creates momentum, and where BSC needs more
@@ -4571,14 +4639,14 @@ body.proposal-open {
     <section class="outcomes-section">
       <div class="section-head">
         <div>
-          <p class="section-label">What BSC could leave with</p>
-          <h3>An actionable direction—not just a future-state concept</h3>
+          <p class="section-label">BSC Outcomes</p>
+          <h3>End with an actionable direction, <br>not just a future-state concept</h3>
         </div>
 
-        <p>
+       <!--<p>
           A shared body of evidence that connects the desired field experience
           to the choices required to move it forward.
-        </p>
+        </p>--> 
       </div>
 
       <div class="outcome-grid">
@@ -4969,6 +5037,17 @@ heroLeverButtons.forEach((button) => {
     heroLeverDetail.hidden = false;
   });
 });
+const whyNowToggle = document.querySelector(".why-now-toggle");
+const whyNowPanel = document.querySelector("#whyNowPanel");
+
+if (whyNowToggle && whyNowPanel) {
+  whyNowToggle.addEventListener("click", () => {
+    const isOpen = whyNowToggle.getAttribute("aria-expanded") === "true";
+
+    whyNowToggle.setAttribute("aria-expanded", String(!isOpen));
+    whyNowPanel.hidden = isOpen;
+  });
+}
   </script>
  
 </body>
