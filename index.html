@@ -3581,6 +3581,62 @@ body.proposal-open {
   text-transform: uppercase;
   line-height: 1;
 }
+/* Mobile hero wrapping fix */
+@media (max-width: 760px) {
+  .hero {
+    padding-top: clamp(120px, 14vh, 150px) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .hero .section-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    font-size: clamp(3.1rem, 16vw, 4.8rem) !important;
+    line-height: .92 !important;
+    letter-spacing: -.055em !important;
+  }
+
+  .hero .lead,
+  .hero p.lead {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    font-size: .98rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .hero-levers {
+    width: 100% !important;
+  }
+
+  .hero-lever {
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-align: left !important;
+  }
+
+  .hero-lever-detail {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 150px !important;
+    max-height: none !important;
+  }
+}
   </style>
 </head>
 <body>
