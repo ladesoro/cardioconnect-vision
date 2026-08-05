@@ -340,3 +340,21 @@ if (whyNowToggle && whyNowPanel) {
     whyNowPanel.hidden = isOpen;
   });
 }
+const workstreamStages = document.querySelectorAll(".workstream-stage");
+
+workstreamStages.forEach((stage) => {
+  const button = stage.querySelector(".workstream-stage-toggle");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    workstreamStages.forEach((item) => {
+      const itemButton = item.querySelector(".workstream-stage-toggle");
+      item.classList.remove("is-active");
+      if (itemButton) itemButton.setAttribute("aria-expanded", "false");
+    });
+
+    stage.classList.add("is-active");
+    button.setAttribute("aria-expanded", "true");
+  });
+});
