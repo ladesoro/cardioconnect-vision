@@ -28,10 +28,10 @@ const maturityProof = {
       connected: {
         label: "Next Phase",
         title: "What “connected” could unlock next",
-        copy: "This is where the experience moves beyond schedule visibility. The case becomes a more consistent cardiology-wide lifecycle and data model that carries context across CRM, EP, and Watchman while allowing division-specific details where needed.",
+        copy: "This is where the experience moves beyond schedule visibility. The case becomes a more consistent cardiology-wide lifecycle and data model that carries context across CRM, EP, Watchman, and ICVT while allowing division-specific details where needed.",
         items: [
           ["Intake / request", "Connected request management", "Identify potential duplicates, support concomitant procedure intake and linking, and explore customer-facing request processes that reduce manual collection and re-entry for field teams."],
-          ["Schedule & assign", "Smarter assignment across the field schedule", "Assignment logic can expand beyond a single case to consider team capacity, related procedures, travel patterns, workload balance, and downstream coverage impacts.."],
+          ["Schedule & assign", "Smarter assignment across the field schedule", "Assignment logic can expand beyond a single case to consider team capacity, related procedures, travel patterns, workload balance, and downstream coverage impacts."],
           ["Prepare", "Case readiness summary", "Reps see procedure details, account context, physician preferences, required inventory, and risk flags before arrival."],
           ["Document & close", "In-app procedure management across divisions", "Documentation moves into the connected case workflow with richer prefill, physician and account templates, device and document capture, and guided review before submission."],
           ["Inventory", "Replenishment is triggered by documented use", "Confirmed device use can reduce expiration risk and prepare replenishment when par levels fall."],
