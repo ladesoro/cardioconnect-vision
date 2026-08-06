@@ -1,3 +1,53 @@
+const SITE_PASSWORDS = ["CCvi$ion2.0", "vision", "slalom123"];
+
+const passwordGate = document.querySelector("#passwordGate");
+const passwordForm = document.querySelector("#passwordForm");
+const passwordInput = document.querySelector("#sitePassword");
+const passwordError = document.querySelector("#passwordError");
+
+function lockSite() {
+  if (!passwordGate) return;
+
+  passwordGate.hidden = false;
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
+
+  setTimeout(() => {
+    passwordInput?.focus();
+  }, 50);
+}
+
+function unlockSite() {
+  if (passwordGate) passwordGate.hidden = true;
+
+  document.documentElement.style.overflow = "";
+  document.body.style.overflow = "";
+}
+
+lockSite();
+
+if (passwordForm) {
+  passwordForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const enteredPassword = passwordInput?.value || "";
+
+    if (SITE_PASSWORDS.includes(enteredPassword)) {
+      if (passwordError) passwordError.hidden = true;
+      unlockSite();
+      return;
+    }
+
+    if (passwordError) passwordError.hidden = false;
+
+    if (passwordInput) {
+      passwordInput.value = "";
+      passwordInput.focus();
+    }
+  });
+}
+
+
 const maturityProof = {
       fragmented: {
         label: "Before MVP",

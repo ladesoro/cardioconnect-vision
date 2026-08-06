@@ -8,6 +8,35 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Password gate -->
+  <div class="password-gate" id="passwordGate" hidden>
+  <div class="password-card">
+    <p class="password-kicker">Protected concept site</p>
+    <h1>Enter password</h1>
+    <p>
+      This CardioConnect future-state vision site is intended for authorized review only.
+    </p>
+
+    <form class="password-form" id="passwordForm">
+      <label for="sitePassword">Password</label>
+      <input
+        id="sitePassword"
+        name="sitePassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter password"
+        required
+      />
+
+      <button type="submit">Unlock site</button>
+
+      <p class="password-error" id="passwordError" hidden>
+        Incorrect password. Please try again.
+      </p>
+    </form>
+  </div>
+</div><!-- End password gate -->
+
   <div class="site-brand">
   <img src="assets/logo.svg" alt="Slalom" />
 </div>
